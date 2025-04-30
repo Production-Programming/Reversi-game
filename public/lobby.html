@@ -8,6 +8,20 @@
         .headerrow {
             background-color:antiquewhite;
         }
+        #colorMessage {
+            background-color: blanchedalmond;
+        }
+
+        .join_room_response,
+        .left_room_response {
+            background-color: rgb(231, 141, 156);
+        }
+
+        .chat_message {
+            font-size: 125%;
+            margin: 1px 1px 1px 10px;
+            color: rgb(158, 73, 87);
+        }
     </style>
     <title>Othello: lobby</title>
   </head>
@@ -15,18 +29,35 @@
     <div class="container-fluid">
         <div class="row m-3 headerrow">
             <div class="col text-center">
-                <h3> ЗАЛ ОЖИДАНИЯ</h3>
+                <h3 id = "lobbyTitle">ЗАЛ ОЖИДАНИЯ</h3>
             </div>
         </div>
         <div class="row m-3">
             <div class="col">
-                <h4> Сообщения </h4>
-                <div id="messages"></div>
+                <div class="row align-items-start justify-content-center">
+                    <div class="col-md-4">
+                        <h4>Игроки</h4>
+                        <div id="players" class="align-items-end text-right m-3">
+
+                        </div>
+                    </div>
+                    <div class="col-md-8" id="colorMessage">
+                        <div>
+                            <h4> Сообщения </h4>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="form-control text-nowrap" id="chatMessage" placeholder="Введите сообщение" aria-label="Введите сообщение для отправки в чат"/>
+                            <button type="submit" class="btn btn-primary text-nowrap" id="chatButton" onclick="sendChatMessage()">Отправить</button>
+                        </div>
+                        <div id="messages"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js" integrity="sha384-SStJQoPipVtHHnIgUfDI+jTAbSyU+HMbhwt2XRRNpLIRFg9VguopT6Y4+cdOlkqg" crossorigin="anonymous"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
     <script src="assets/js/main.js"></script>
 </body>
