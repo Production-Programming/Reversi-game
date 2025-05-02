@@ -1,4 +1,4 @@
-class Board {
+export default class Board {
 
     constructor(length) {
         this._cells = new Array;
