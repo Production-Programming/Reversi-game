@@ -28,7 +28,7 @@ socket.on('log', function(array) {
 });
 
 function makeInviteButton(socket_id){
-    let newHTML = "<button type='button' class='btn btn-outline-primary'>Пригласить</button>";
+    let newHTML = "<button type='button' class='btn invite-btn'>Пригласить</button>";
     let newNode = $(newHTML);
     newNode.click( () => {
         let payload = {
@@ -42,7 +42,7 @@ function makeInviteButton(socket_id){
 }
 
 function makeInvitedButton(socket_id){
-    let newHTML = "<button type='button' class='btn btn-primary'>Приглашен</button>";
+    let newHTML = "<button type='button' class='btn invited-btn'>Приглашен</button>";
     let newNode = $(newHTML);
     newNode.click( () => {
         let payload = {
@@ -56,7 +56,7 @@ function makeInvitedButton(socket_id){
 }
 
 function makePlayButton(socket_id){
-    let newHTML = "<button type='button' class='btn btn-success'>Играть</button>";
+    let newHTML = "<button type='button' class='btn play-btn'>Играть</button>";
     let newNode = $(newHTML);
     newNode.click( () => {
         let payload = {
@@ -154,6 +154,7 @@ socket.on('join_room_response', (payload) =>{
     let nodeA = $("<div></div>");
     nodeA.addClass("row");
     nodeA.addClass("align-items-center");
+    nodeA.addClass("players-list")
     nodeA.addClass("socket_"+payload.socket_id);
     nodeA.hide();
 
