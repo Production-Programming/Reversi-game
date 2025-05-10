@@ -1,4 +1,4 @@
-class Game {
+export default class Game {
 
     constructor(player1, player2) {
         this._playing = false;
