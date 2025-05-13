@@ -19,6 +19,6 @@ class Player {
     }
     
     set pieces(pieces) {
-        this._pieces = pieces
+        this._pieces = pieces;
     }
 }
