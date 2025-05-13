@@ -1,4 +1,4 @@
-export default class Cell {
+class Cell {
 
     constructor(row, col, piece = null) {
         this._row = row; 

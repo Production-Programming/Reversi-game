@@ -1,4 +1,4 @@
-export default class Board {
+class Board {
 
     constructor(length) {
         this._cells = new Array;
@@ -78,7 +78,7 @@ export default class Board {
         this._possible_moves = [];
     }
 
-     placePiece(row, col, color){
+    placePiece(row, col, color){
         let piece_HTML = `<img class="img-fluid" src="assets/images/piece_${color}.png">`;
         $(`#${row}-${col}`).html(piece_HTML);
     }

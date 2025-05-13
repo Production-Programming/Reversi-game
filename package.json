@@ -4,7 +4,7 @@
   "description": "Reversi (Othello) web application",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "open tests/test.html"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,10 @@
   "dependencies": {
     "node-static": "^0.7.11",
     "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.2.2",
+    "sinon": "^20.0.0"
   }
 }

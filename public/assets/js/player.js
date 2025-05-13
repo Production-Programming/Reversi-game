@@ -1,4 +1,4 @@
-export default class Player {
+class Player {
 
     constructor(player, color) {
         this._name = player;
@@ -19,6 +19,6 @@ export default class Player {
     }
     
     set pieces(pieces) {
-        this._pieces = pieces
+        this._pieces = pieces;
     }
 }
