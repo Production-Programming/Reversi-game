@@ -177,7 +177,7 @@ socket.on('join_room_response', (payload) =>{
     $("#players").append(nodeA);
     nodeA.show("fade", 1000);
 
-    let newHTML = '<p class=\'join_room_response\'>'+payload.username+' вошел в '+payload.room+'. (В зале ожидания находятся '+payload.count+' человек)</p>';
+    let newHTML = '<p class=\'join-room-response\'>'+payload.username+' вошел в '+payload.room+'. (В зале ожидания находятся '+payload.count+' человек)</p>';
     let newNode = $(newHTML);
     newNode.hide();    
     $('#messages').prepend(newNode);
@@ -199,7 +199,7 @@ socket.on('player_disconnected', (payload) =>{
         domElements.hide("fade", 500);
     }
 
-    let newHTML = '<p class=\'left_room_response\'>'+payload.username+' покинул '+payload.room+'. (В зале ожидания находятся '+payload.count+' человек)</p>';
+    let newHTML = '<p class=\'left-room-response\'>'+payload.username+' покинул '+payload.room+'. (В зале ожидания находятся '+payload.count+' человек)</p>';
     let newNode = $(newHTML);
     newNode.hide();    
     $('#messages').prepend(newNode);
@@ -225,7 +225,7 @@ socket.on('send_chat_message_response', (payload) =>{
         console.log(payload.message);
         return;
     }
-    let newHTML = '<p class=\'chat_message\'><b>'+payload.username+'</b>: '+payload.message+'</p>';
+    let newHTML = '<p class=\'chat-message\'><b>'+payload.username+'</b>: '+payload.message+'</p>';
     let newNode = $(newHTML);
     newNode.hide();
     $('#messages').prepend(newNode);

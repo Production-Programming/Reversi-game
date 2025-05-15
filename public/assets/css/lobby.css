@@ -8,22 +8,28 @@ body {
 }
 
 .header-row {
-    background-color: #f1a08e;
+    background-color: #e57373;
     padding: 20px 0;
     margin-bottom: 20px;
     border: 0.2em solid #d96666;
     border-radius: 10px;
 }
 
-#lobbyTitle, .titleName {
-    color: #42724e; 
+#lobbyTitle, #sectionTitle{
     font-weight: 600;
     font-family: monospace;
     text-align: center;
 }
 
+#lobbyTitle {
+    color: rgb(247, 236, 236); 
+}
+
+#sectionTitle{
+    color: #e57373
+}
+
 #colorMessage {
-    background-color: #f1a08e;
     border: 0.2em solid #d96666;
     border-radius: 10px;
     padding: 15px;
@@ -31,7 +37,6 @@ body {
 
 #colorPlayers {
     background-color: #ffe5c6;
-    border-radius: 100px;
     padding: 15px;
 }
 
@@ -39,16 +44,17 @@ body {
     color: #42724e;
     margin-bottom: 10px;
 }
-.join_room_response,
-.left_room_response {
-    color: rgb(247, 236, 236);
+
+.join-room-response,
+.left-room-response {
+    color: #e57373;
     font-weight: 600;
     padding: 8px;
     border-radius: 5px;
     margin-bottom: 5px;
 }
 
-.chat_message {
+.chat-message {
     margin: 5px 0;
     padding: 8px 12px;
     background-color: #ed7373;
@@ -58,7 +64,7 @@ body {
 
 #messages {
     max-height: 300px;
-    overflow-y: auto;
+    overflow-y: auto; 
     padding: 10px;
 }
 
@@ -66,6 +72,7 @@ body {
     background-color: #42724e;
     border-color: #42724e;
     border-radius: 10px;
+    color: rgb(247, 236, 236);
 }
 
 #chatButton:hover {
