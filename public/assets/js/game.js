@@ -22,6 +22,10 @@ class Game {
         return this._board;
     }
 
+    get possibleMoves(){
+        return this._possible_moves;
+    }
+
     moveDirections = [
         { row: -1, col: 0 },
         { row: -1, col: 1 },
@@ -38,27 +42,29 @@ class Game {
     }
 
 
-    newGame(boardLength) {
-
+    newGame(boardLength, withHtml = true) {
         this._turn = this._player1.color === "white" ? this._player1 : this._player2;
 
         this._playing = true;
         this.newBoard(boardLength);
-        this.board.printBoard();
-        this.fillBoard();
-        this.addEventsToBoard();
-        this.board.fillLayout(this._player1, this._player2);
-
+        if (withHtml){
+            this.board.printBoard();
+        }
+        this.fillBoard(withHtml);
+        if (withHtml){
+            this.addEventsToBoard();
+            this.board.fillLayout(this._player1, this._player2);
+        }
+        
         this._pieces_placed = 4;
         this._possible_moves = new Array();
         this._player1.pieces = 2;
         this._player2.pieces = 2;
 
-        this.getMoves();
-
+        this.getMoves(withHtml);
     }
 
-    fillBoard() {
+    fillBoard(withHtml = true) {
         for (let row = 1; row <= this._board.length; row++) {
             for (let col = 1; col <= this._board.length; col++) {
                 this._board.addCell(new Cell(row, col));
@@ -77,17 +83,19 @@ class Game {
         startingPieces.forEach(piece => {
             cell = this.getCell(piece.row, piece.col);
             cell.piece = piece.color;
-            this._board.placePiece(piece.row, piece.col, piece.color);
+            if (withHtml){
+                this._board.placePiece(piece.row, piece.col, piece.color);
+            }
         });
 
     }
 
     addEventsToBoard() {
         $("#p1-surrender").click(() => {
-            this.surrender(this._player1);
+            this.surrenderWindow(this._player1);
         });
         $("#p2-surrender").click(() => {
-            this.surrender(this._player2);
+            this.surrenderWindow(this._player2);
         });
 
         for (let row = 1; row <= this.board.length; row++) {
@@ -128,37 +136,38 @@ class Game {
     }
 
     getPieces(color) {
-        return this._board.cells.filter(cell => cell.piece == color);
+        return this._board.cells.filter(cell => cell.piece === color);
     }
 
-    getMoves() {
-
+    getMoves(withHtml = true) {
         let cells = this.getPieces(this._turn.color);
 
         for (let cell of cells) {
             for (let move of this.moveDirections) {
-                let move_result = this.checkMove(cell.row, cell.col, move.row, move.col, this.turn.color);
-                if (move_result) 
-                    this._possible_moves.push(move_result);
-                
+                let moveResult = this.checkMove(cell.row, cell.col, move.row, move.col, this.turn.color);
+                if (moveResult){
+                    this._possible_moves.push(moveResult);
+                } 
             }
         }
 
-        for (let move of this._possible_moves) 
-            this._board.showMove(move.row, move.col, this.turn.color);
-        
+        if (withHtml){
+            for (let move of this._possible_moves){
+                this._board.showMove(move.row, move.col, this.turn.color);
+            }
+        }
     }
 
-    checkMove(row, col, move_row, move_col, color, opponent_piece = false) {
-        if (!this.isMoveInsideBoard(row + move_row, col + move_col)) 
+    checkMove(row, col, moveRow, moveCol, color, opponentPiece = false) {
+        if (!this.isMoveInsideBoard(row + moveRow, col + moveCol)) 
             return false;
         else {
-            if (this.getCell(row + move_row, col + move_col).piece === color || (!opponent_piece && !this.getCell(row + move_row, col + move_col).piece)) 
+            if (this.getCell(row + moveRow, col + moveCol).piece === color || (!opponentPiece && !this.getCell(row + moveRow, col + moveCol).piece)) 
                 return false;
-            else if (this.getCell(row + move_row, col + move_col).piece == null && opponent_piece) 
-                return { row: row + move_row, col: col + move_col, id: `${row + move_row}-${col + move_col}` };
-            else if (this.getCell(row + move_row, col + move_col).piece != color) 
-                return this.checkMove(row + move_row, col + move_col, move_row, move_col, color, true);
+            else if (this.getCell(row + moveRow, col + moveCol).piece == null && opponentPiece) 
+                return { row: row + moveRow, col: col + moveCol, id: `${row + moveRow}-${col + moveCol}` };
+            else if (this.getCell(row + moveRow, col + moveCol).piece != color) 
+                return this.checkMove(row + moveRow, col + moveCol, moveRow, moveCol, color, true);
             
         }
 
@@ -168,79 +177,85 @@ class Game {
         return (row < 1 || row > this._board.length || col < 1 || col > this._board.length) ? false : true;
     }
 
-    placePiece(row, col) {
+    placePiece(row, col, withHtml = true) {
         this._pieces_placed += 1;
 
-        this.clearMoves();
+        this.clearMoves(withHtml);
 
         this.getCell(row, col).piece = this._turn.color;
-        this._board.placePiece(row, col, this._turn.color);
+        if (withHtml){
+            this._board.placePiece(row, col, this._turn.color);
+        }
 
-        this.checkCapturedPieces(row, col);
+        this.checkCapturedPieces(row, col, withHtml);
 
-        if (this._pieces_placed === Math.pow(this._board.length, 2))
-            this.endGame();
+        if (this._pieces_placed === Math.pow(this._board.length, 2) & withHtml)
+            this.endGameWindow();
 
-        else if (!this.checkMovesLeft(this.opponent)){
+        else if (!this.checkMovesLeft(this.opponent) & withHtml){
             if (!this.checkMovesLeft(this.turn)) 
-                this.noMovesLeftToast();
+                this.noMovesLeftWindow();
             else
-                this.skipTurnToast();
+                this.skipTurnWindow();
             
         } else
-            this.changeTurn();
+            this.changeTurn(withHtml);
 
     }
 
-    checkCapturedPieces(row, col) {
+    checkCapturedPieces(row, col, withHtml = true) {
 
-        let captured_pieces = 0;
+        let capturedPieces = 0;
         let captured = false;
-        let row_aux = row;
-        let col_aux = col;
+        let rowAux = row;
+        let colAux = col;
 
         for (let move of this.moveDirections) {
-            while (this.isMoveInsideBoard(row_aux + move.row, col_aux + move.col) && 
-                    this.getCell(row_aux + move.row, col_aux + move.col).piece === this.opponent.color && !captured ) {
-                if (this.isMoveInsideBoard(row_aux + move.row * 2, col_aux + move.col * 2) && 
-                    this.getCell(row_aux + move.row * 2, col_aux + move.col * 2).piece === this.turn.color) {
+            while (this.isMoveInsideBoard(rowAux + move.row, colAux + move.col) && 
+                    this.getCell(rowAux + move.row, colAux + move.col).piece === this.opponent.color && !captured ) {
+                if (this.isMoveInsideBoard(rowAux + move.row * 2, colAux + move.col * 2) && 
+                    this.getCell(rowAux + move.row * 2, colAux + move.col * 2).piece === this.turn.color) {
                     
-                    captured_pieces += this.captureFromTo(row, col, row_aux + move.row , col_aux + move.col, move.row, move.col);
+                    capturedPieces += this.captureFromTo(row, col, rowAux + move.row , colAux + move.col, move.row, move.col, withHtml);
                     captured = true;
                 }
 
-                row_aux += move.row;
-                col_aux += move.col;
+                rowAux += move.row;
+                colAux += move.col;
             }
 
-            row_aux = row;
-            col_aux = col;
+            rowAux = row;
+            colAux = col;
             captured = false;
 
         }
 
-        this.turn.pieces += captured_pieces + 1;
-        this.opponent.pieces -= captured_pieces;
-        this._board.updatePieces( this.turn.color, this.turn.pieces);
-        this._board.updatePieces( this.opponent.color, this.opponent.pieces);
+        this.turn.pieces += capturedPieces + 1;
+        this.opponent.pieces -= capturedPieces;
+        if (withHtml){
+            this._board.updatePieces( this.turn.color, this.turn.pieces);
+            this._board.updatePieces( this.opponent.color, this.opponent.pieces);
+        }
         
-        if (this.opponent.pieces == 0) 
-            this.winner(this.turn.name + " выиграл(а)!");    
+        if (this.opponent.pieces === 0 & withHtml) 
+            this.winnerWindow(this.turn.name + " выиграл(а)!");    
 
     }
 
-    captureFromTo(row, col, to_row, to_col, move_row, move_col) {
-        let captured_pieces = 0;
+    captureFromTo(row, col, toRow, toCol, moveRow, moveCol, withHtml = true) {
+        let capturedPieces = 0;
 
-        while (row != to_row || col != to_col) {
-            this._board.placePiece(row + move_row, col + move_col, this._turn.color);
-            this.getCell(row + move_row, col + move_col).piece = this._turn.color;
+        while (row !== toRow || col !== toCol) {
+            if (withHtml){
+                this._board.placePiece(row + moveRow, col + moveCol, this._turn.color);
+            }
+            this.getCell(row + moveRow, col + moveCol).piece = this._turn.color;
             
-            row += move_row;
-            col += move_col;
-            captured_pieces += 1;
+            row += moveRow;
+            col += moveCol;
+            capturedPieces += 1;
         }
-        return captured_pieces;
+        return capturedPieces;
     }
 
     checkMovesLeft(player) {
@@ -256,24 +271,26 @@ class Game {
         return false;
     }
 
-    clearMoves() {
-        this._board.hideMoves();
+    clearMoves(withHtml = true) {
+        if (withHtml){
+            this._board.hideMoves();
+        }
         this._possible_moves = [];
     }
 
-    changeTurn() {
+    changeTurn(withHtml = true) {
         this._turn = this._turn === this._player1 ? this._player2 : this._player1;
-        this.getMoves();
+        this.getMoves(withHtml);
     }
 
-    endGame(){
+    endGameWindow(){
         if (this._player1.pieces === this._player2.pieces)
-            this.winner("Ничья");
+            this.winnerWindow("Ничья");
         else
-            this._player1.pieces > this._player2.pieces ? this.winner(this._player1.name + " выиграл(а)!") : this.winner(this._player2.name + " выиграл(а)!");
+            this._player1.pieces > this._player2.pieces ? this.winnerWindow(this._player1.name + " выиграл(а)!") : this.winnerWindow(this._player2.name + " выиграл(а)!");
     }
 
-    winner(message) {
+    winnerWindow(message) {
         this._playing = false;
         let url = "assets/images/win.gif"; 
 
@@ -281,7 +298,6 @@ class Game {
             url = "assets/images/draw.png";
 
         Swal.fire({
-
             text: message,
             imageUrl: url,
             imageWidth: 300,
@@ -290,12 +306,12 @@ class Game {
             confirmButtonText: 'ок',
 
         }).then(() => {
-            this.newGameModal();
+            this.newGameWindow();
         });
 
     }
 
-    skipTurnToast() {
+    skipTurnWindow() {
 
             Swal.fire({
 
@@ -310,7 +326,7 @@ class Game {
 
     }
 
-    noMovesLeftToast() {
+    noMovesLeftWindow() {
 
             Swal.fire({
 
@@ -321,11 +337,11 @@ class Game {
                 showCancelButton: false,
                 width: '40%',
 
-            }).then(() => { this.endGame(); });
+            }).then(() => { this.endGameWindow(); });
 
     }
 
-    surrender(player) {
+    surrenderWindow(player) {
 
         if (this._playing && this._turn == player) {
 
@@ -352,7 +368,7 @@ class Game {
                         width: '40%',
 
                     }).then(() => {
-                        this.newGameModal();
+                        this.newGameWindow();
                     });
 
                 }
@@ -361,7 +377,7 @@ class Game {
         }
     }
 
-    newGameModal() {
+    newGameWindow() {
 
         Swal.fire({
 
