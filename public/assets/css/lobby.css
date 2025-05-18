@@ -26,7 +26,7 @@ body {
 }
 
 #sectionTitle{
-    color: #e57373
+    color: #42724e
 }
 
 #colorMessage {
@@ -47,7 +47,7 @@ body {
 
 .join-room-response,
 .left-room-response {
-    color: #e57373;
+    color: #42724e;
     font-weight: 600;
     padding: 8px;
     border-radius: 5px;
