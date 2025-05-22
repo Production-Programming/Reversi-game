@@ -149,6 +149,16 @@ describe("Game integration tests", function() {
         }
     });
 
+    it("Change turn", function() {
+      let game = new Game(player1, player2);
+
+      game.newGame(8, false);
+      assert.equal(game.turn, player1);
+      
+      game.placePiece(6, 4, false);
+      assert.equal(game.turn, player2);
+    });
+
     it('Change color Up', function () {
         let game = new Game(player1, player2);
       

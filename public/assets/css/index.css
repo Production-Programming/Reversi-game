@@ -1,0 +1,45 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffe5c6;
+}
+
+.variant-btn {
+    background-color: #e57373;
+    border-color: #ed7373;
+    border: 0.2em solid #d96666;
+    color: rgb(247, 236, 236);
+}
+
+.variant-btn:hover {
+    background-color: #f1a08e;;
+    border: 0.2em solid #d96666;
+    color: rgb(247, 236, 236);
+}
+
+.logo {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 300px;
+    height: 300px;
+}
+
+#nameInput {
+    border-radius: 10px;
+}
+
+#lobbyButton, #displayName, .local-btn{
+    background-color: #42724e;
+    border-color: #42724e;
+    border-radius: 10px;
+    color: rgb(247, 236, 236);
+}
+
+#displayName {
+    margin-left: 10px;
+}
+
+#lobbyButton:hover, .local-btn:hover{
+    background-color: #47b160;
+    border-color: #47b160;
+    color: rgb(247, 236, 236);
+}
