@@ -228,7 +228,7 @@ body {
 
 #sectionTitle{
     text-align: center;
-    background-color: #d96666;
+    background-color: #42724e;
     color: white;
     margin: 5% 0%;
     padding: 2.2%;
@@ -264,7 +264,7 @@ body {
 .chat-message {
     margin: 5px 0;
     padding: 8px 12px;
-    background-color: #ed7373;
+    background-color: #d96666;
     border-radius: 5px;
     color: rgb(247, 236, 236);
 }
