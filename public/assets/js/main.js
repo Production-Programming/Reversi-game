@@ -177,7 +177,10 @@ socket.on('join_room_response', (payload) =>{
     $("#players").append(nodeA);
     nodeA.show("fade", 1000);
 
-    let newHTML = '<p class=\'join-room-response\'>'+payload.username+' вошел в '+payload.room+'. (В зале ожидания находятся '+payload.count+' человек)</p>';
+    let newHTML = '<p class=\'join-room-response\'>'+payload.username+' вошел в чат. (В зале ожидания находятся '+payload.count+' человек)</p>';
+    if (payload.room !== "зал ожидания"){
+        newHTML = '<p class=\'join-room-response\'>'+payload.username+' приесоединился к игре.</p>';
+    }
     let newNode = $(newHTML);
     newNode.hide();    
     $('#messages').prepend(newNode);
@@ -199,7 +202,10 @@ socket.on('player_disconnected', (payload) =>{
         domElements.hide("fade", 500);
     }
 
-    let newHTML = '<p class=\'left-room-response\'>'+payload.username+' покинул '+payload.room+'. (В зале ожидания находятся '+payload.count+' человек)</p>';
+    let newHTML = '<p class=\'left-room-response\'>'+payload.username+' покинул чат. (В зале ожидания находятся '+payload.count+' человек)</p>';
+    if (payload.room !== "зал ожидания"){
+        newHTML = '<p class=\'left-room-response\'>'+payload.username+' покинул игру.</p>';
+    }
     let newNode = $(newHTML);
     newNode.hide();    
     $('#messages').prepend(newNode);
@@ -232,6 +238,205 @@ socket.on('send_chat_message_response', (payload) =>{
     newNode.show("fade", 500)
 })
 
+let old_board = [
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+];
+
+let my_color = "";
+
+let interval_timer;
+
+socket.on('game_update', (payload) =>{
+    if(( typeof payload == 'undefined') || (payload === null)){
+        console.log('Server did not send a payload');
+        return;
+    }
+    if(payload.result === 'fail'){
+        console.log(payload.message);
+        return;
+    }
+    let board = payload.game.board;
+    if(( typeof board == 'undefined') || (board === null)){
+        console.log('Server did not send a valid board to display');
+        return;
+    }
+
+    if (socket.id === payload.game.player_white.socket){
+        my_color = "white";
+        $("#p1").html(payload.game.player_white.username);
+        $("#p1-color").css("backgroundImage", `url(assets/images/piece_white.png)`);
+
+        $("#p2").html(payload.game.player_black.username);
+        $("#p2-color").css("backgroundImage", `url(assets/images/piece_black.png)`);
+        $(`#p2-pieces`).addClass("text-light");
+    }
+    else if (socket.id === payload.game.player_black.socket){
+        my_color = "black";
+        $("#p1").html(payload.game.player_black.username);
+        $("#p1-color").css("backgroundImage", `url(assets/images/piece_black.png)`);
+        $(`#p1-pieces`).addClass("text-light");
+
+        $("#p2").html(payload.game.player_white.username);
+        $("#p2-color").css("backgroundImage", `url(assets/images/piece_white.png)`);
+    }
+    else{
+        window.location.href = "lobby.html?username=" + username;
+        return;
+    }
+
+    if (payload.game.whose_turn === my_color){
+        $("#my_turn").html('Ваш ход');
+    }
+    else {
+        $("#my_turn").html('Ход противника');
+    }
+
+    let whitesum = 0;
+    let blacksum = 0;
+
+    for (let row = 0; row < 8; row++){
+        for (let col = 0; col < 8; col++){
+            if (board[row][col] === 'w'){
+                whitesum++;
+            }
+            else if (board[row][col] === 'b'){
+                blacksum++;
+            }
+
+            if (old_board[row][col] !== board[row][col]){
+                let graphic = "empty.png";
+                let altTag = "empty";
+                if ((old_board[row][col] === ' ') && (board[row][col] === 'w')){
+                    graphic = "piece_white.png";
+                    altTag = "white";
+                }
+                else if ((old_board[row][col] === ' ') && (board[row][col] === 'b')){
+                    graphic = "piece_black.png";
+                    altTag = "black";
+                }
+                else if ((old_board[row][col] === 'b') && (board[row][col] === 'w')){
+                    graphic = "piece_white.png";
+                    altTag = "white";
+                }
+                else if ((old_board[row][col] === 'w') && (board[row][col] === 'b')){
+                    graphic = "piece_black.png";
+                    altTag = "black";
+                }
+                const t = Date.now();
+                $('#'+row+'_'+col).html('<img class="img-fluid" src="assets/images/' +graphic+'?time='+t+'" alt="'+altTag+'" />');
+            }
+            else if (board[row][col] === ' '){
+                $('#'+row+'_'+col).html("");
+            }
+
+            $('#'+row+'_'+ col).off('click');
+
+            if (payload.game.whose_turn === my_color){
+                if (payload.game.legal_moves[row][col] === my_color.substr(0, 1)){
+                    const t = Date.now();
+                    $('#'+row+'_'+col).html('<img class="img-fluid piece_placeholder" src="assets/images/piece_' +my_color+'.png?time='+t+'" alt="'+my_color+'" />');
+                    $('#'+row+'_'+col).click(((r,c) => {
+                        return (() => {
+                            let payload = {
+                                row: r,
+                                column: c,
+                                color: my_color
+                            };
+                            console.log('**** Client log message, sending \'play_token\' command: '+JSON.stringify(payload));
+                            socket.emit('play_token', payload);
+                        });
+                    })(row, col));
+                }
+            }
+        }
+    }
+
+    clearInterval(interval_timer);
+    interval_timer = setInterval(((last_time) => {
+        return (() => {
+            let d = new Date();
+            let elapsed_m = d.getTime() - last_time;
+            let minutes = Math.floor((elapsed_m/1000)/60);
+            let seconds = Math.floor((elapsed_m % (60 * 1000))/1000);
+            let total = minutes * 60 + seconds;
+            if (total > 100){
+                total = 100;
+            }
+            $("#elapsed").css("width", total+"%").attr("aria-valuenow", total);
+            let timestring = ""+seconds;
+            timestring = timestring.padStart(2, '0');
+            timestring = minutes + ":" + timestring;
+            if (total >= 100){
+                $("#elapsed").html("Время вышло!");
+            }
+            else{
+                $("#elapsed").html(timestring);
+            }
+        })
+    })(payload.game.last_move_time), 1000);
+    
+    if (my_color === "white"){
+        $('#p1-pieces').html(whitesum);
+        $('#p2-pieces').html(blacksum);
+    }
+    else{
+        $('#p2-pieces').html(whitesum);
+        $('#p1-pieces').html(blacksum);
+    }
+    
+    old_board = board;
+})
+
+socket.on('play_token_response', (payload) =>{
+    if(( typeof payload == 'undefined') || (payload === null)){
+        console.log('Server did not send a payload');
+        return;
+    }
+    if(payload.result === 'fail'){
+        console.log(payload.message);
+        alert(payload.message);
+        return;
+    }
+})
+
+socket.on('game_over', (payload) =>{
+    if(( typeof payload == 'undefined') || (payload === null)){
+        console.log('Server did not send a payload');
+        return;
+    }
+    if(payload.result === 'fail'){
+        console.log(payload.message);
+        return;
+    }
+
+    let message = "Ничья!";
+    let url = "assets/images/draw.png";
+
+    if (payload.who_won !== ""){
+        message = payload.who_won + " победил!";
+        url = "assets/images/win.gif"; 
+    }
+
+    Swal.fire({
+        text: message,
+        imageUrl: url,
+        imageWidth: 300,
+        imageHeight: 300,
+        confirmButtonColor: '#42724e',
+        confirmButtonText: 'ок',
+
+    }).then(() => {
+        window.location.href = 'lobby.html?username=' + username;
+    });
+});
+
 $( () => {
     let request = {};
     request.room = chatRoom;
@@ -239,7 +444,8 @@ $( () => {
     console.log('**** Client log message, sending \'join_room\' command: '+JSON.stringify(request));
     socket.emit('join_room',request);
 
-    $("#lobbyTitle").html(username+": зал ожидания");
+    $('#lobbyTitle').html(username+": зал ожидания");
+    $('#quit').attr("href", "'lobby.html?username=" + username + "' role='button'");
 
     $('#chatMessage').keypress(function (e) {
         let key = e.which;
@@ -247,5 +453,5 @@ $( () => {
             $('button[id = chatButton]').click();
             return false;
         }
-    })
+    });
 });
