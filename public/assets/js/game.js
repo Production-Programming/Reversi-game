@@ -43,7 +43,7 @@ class Game {
 
 
     newGame(boardLength, withHtml = true) {
-        this._turn = this._player1.color === "white" ? this._player1 : this._player2;
+        this._turn = this._player1.color === "black" ? this._player1 : this._player2;
 
         this._playing = true;
         this.newBoard(boardLength);
