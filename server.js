@@ -1,3 +1,6 @@
+const logger = require('./logger');
+const sendAlert = require('./mailer');
+
 let static = require('node-static');
 
 let http = require('http');
@@ -19,7 +22,7 @@ let app = http.createServer(
     }
 ).listen(port);
 
-console.log("The server is running")
+logger.info("The server is running")
 
 let players = [];
 
@@ -29,11 +32,10 @@ const io = new Server(app);
 
 io.on('connection', (socket) => {
     function serverLog(...messages){
-        io.emit('log',['**** Message from the server:\n']);
-        messages.forEach((item) => {
-            io.emit('log',['****\t'+item]);
-            console.log(item);
-        })
+        messages.forEach((msg) => {
+            logger.info(msg);
+            io.emit('log', ['****\t' + msg]);
+    });
     }
 
     serverLog('a page connected to the server: '+socket.id);
@@ -45,7 +47,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send the payload';
             socket.emit('invite_response', response);
-            serverLog('invite command failed', JSON.stringify(response));
+            logger.error('invite command failed', JSON.stringify(response));
             return;
         }
         let requested_user = payload.requested_user;
@@ -57,7 +59,7 @@ io.on('connection', (socket) => {
                 message:'client did not send the valid user to invite to play'
             }
             socket.emit('invite_response', response);
-            serverLog('invite command failed', JSON.stringify(response));
+            logger.error('invite command failed', JSON.stringify(response));
             return;
         }
         if ((typeof room == 'undefined') || (room === null) || (room === "")) {
@@ -66,7 +68,8 @@ io.on('connection', (socket) => {
                 message:'the user that was invited in not in a room'
             }
             socket.emit('invite_response', response);
-            serverLog('invite command failed', JSON.stringify(response));
+            logger.error('invite command failed', JSON.stringify(response));
+            sendAlert('❗ Приглашение без комнаты', `Игрок: ${username} (socket: ${socket.id}) пытается пригласить, но не в комнате.`);
             return;
         }
         if ((typeof username == 'undefined') || (username === null) || (username == "")) {
@@ -75,7 +78,7 @@ io.on('connection', (socket) => {
                 message:'the user that was invited does not have a name registered'
             }
             socket.emit('invite_response', response);
-            serverLog('invite command failed', JSON.stringify(response));
+            logger.error('invite command failed', JSON.stringify(response));
             return;
         }
 
@@ -86,7 +89,7 @@ io.on('connection', (socket) => {
                     message:'the user that was invited is no longer in the room'
                 }
                 socket.emit('invite_response', response);
-                serverLog('invite command failed', JSON.stringify(response));
+                logger.error('invite command failed', JSON.stringify(response));
             }
             else{
                 response = {
@@ -112,7 +115,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send the payload';
             socket.emit('uninvited', response);
-            serverLog('uninvite command failed', JSON.stringify(response));
+            logger.error('uninvite command failed', JSON.stringify(response));
             return;
         }
         let requested_user = payload.requested_user;
@@ -124,7 +127,7 @@ io.on('connection', (socket) => {
                 message:'client did not send the valid user to uninvite'
             }
             socket.emit('uninvited', response);
-            serverLog('uninvite command failed', JSON.stringify(response));
+            logger.error('uninvite command failed', JSON.stringify(response));
             return;
         }
         if ((typeof room == 'undefined') || (room === null) || (room === "")) {
@@ -133,7 +136,7 @@ io.on('connection', (socket) => {
                 message:'the user that was uninvited is not in a room'
             }
             socket.emit('uninvited', response);
-            serverLog('uninvite command failed', JSON.stringify(response));
+            logger.error('uninvite command failed', JSON.stringify(response));
             return;
         }
         if ((typeof username == 'undefined') || (username === null) || (username == "")) {
@@ -142,7 +145,7 @@ io.on('connection', (socket) => {
                 message:'the user that was uninvited does not have a name registered'
             }
             socket.emit('uninvited', response);
-            serverLog('uninvite command failed', JSON.stringify(response));
+            logger.error('uninvite command failed', JSON.stringify(response));
             return;
         }
 
@@ -153,7 +156,7 @@ io.on('connection', (socket) => {
                     message:'the user that was uninvited is no longer in the room'
                 }
                 socket.emit('uninvited', response);
-                serverLog('uninvite command failed', JSON.stringify(response));
+                logger.error('uninvite command failed', JSON.stringify(response));
             }
             else{
                 response = {
@@ -179,7 +182,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send the payload';
             socket.emit('game_start_response', response);
-            serverLog('game_start command failed', JSON.stringify(response));
+            logger.error('game_start command failed', JSON.stringify(response));
             return;
         }
         let requested_user = payload.requested_user;
@@ -191,7 +194,7 @@ io.on('connection', (socket) => {
                 message:'client did not send the valid user to engage in play'
             }
             socket.emit('game_start_response', response);
-            serverLog('game_start command failed', JSON.stringify(response));
+            logger.error('game_start command failed', JSON.stringify(response));
             return;
         }
         if ((typeof room == 'undefined') || (room === null) || (room === "")) {
@@ -200,7 +203,7 @@ io.on('connection', (socket) => {
                 message:'the user that was engaged to play is not in a room'
             }
             socket.emit('game_start_response', response);
-            serverLog('game_start command failed', JSON.stringify(response));
+            logger.error('game_start command failed', JSON.stringify(response));
             return;
         }
         if ((typeof username == 'undefined') || (username === null) || (username == "")) {
@@ -209,7 +212,7 @@ io.on('connection', (socket) => {
                 message:'the user that was engaged to play does not have a name registered'
             }
             socket.emit('game_start_response', response);
-            serverLog('game_start command failed', JSON.stringify(response));
+            logger.error('game_start command failed', JSON.stringify(response));
             return;
         }
 
@@ -220,7 +223,7 @@ io.on('connection', (socket) => {
                     message:'the user that was engaged to play is no longer in the room'
                 }
                 socket.emit('game_start_response', response);
-                serverLog('game_start command failed', JSON.stringify(response));
+                logger.error('game_start command failed', JSON.stringify(response));
             }
             else{
                 let game_id = Math.floor(1 + Math.random() * 0x100000).toString(16);
@@ -243,7 +246,8 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send the payload';
             socket.emit('join_room_response', response);
-            serverLog('join_room command failed', JSON.stringify(response));
+            logger.error('join_room command failed', JSON.stringify(response));
+            sendAlert('❗ Ошибка регистрации пользователя', `Socket ID: ${socket.id} не передал username`);
             return;
         }
         let room = payload.room;
@@ -253,7 +257,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send a valid room to join';
             socket.emit('join_room_response', response);
-            serverLog('join_room command failed', JSON.stringify(response));
+            logger.error('join_room command failed', JSON.stringify(response));
             return;
         }
         if ((typeof username == 'undefined') || (username === null)) {
@@ -261,7 +265,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send the valid username';
             socket.emit('join_room_response', response);
-            serverLog('join_room command failed', JSON.stringify(response));
+            logger.error('join_room command failed', JSON.stringify(response));
             return;
         }
 
@@ -274,7 +278,7 @@ io.on('connection', (socket) => {
                 response.result = 'fail';
                 response.message = 'Server internal error joining chat room';
                 socket.emit('join_room_response', response);
-                serverLog('join_room command failed', JSON.stringify(response));
+                logger.error('join_room command failed', JSON.stringify(response));
             }
             else{
                 players[socket.id] = {
@@ -324,7 +328,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send the payload';
             socket.emit('send_chat_message_response',response);
-            serverLog('send_chat_message command failed', JSON.stringify(response));
+            logger.error('send_chat_message command failed', JSON.stringify(response));
             return;
         }
         let room = payload.room;
@@ -335,7 +339,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send a valid room to message';
             socket.emit('send_chat_message_response',response);
-            serverLog('send_chat_message command failed', JSON.stringify(response));
+            logger.error('send_chat_message command failed', JSON.stringify(response));
             return;
         }
         if ((typeof username == 'undefined') || (username === null)){
@@ -343,7 +347,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send the valid username';
             socket.emit('send_chat_message_response', response);
-            serverLog('send_chat_message command failed', JSON.stringify(response));
+            logger.error('send_chat_message command failed', JSON.stringify(response));
             return;
         }
         if ((typeof message == 'undefined') || (message === null)){
@@ -351,7 +355,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send the valid message';
             socket.emit('send_chat_message_response', response);
-            serverLog('send_chat_message command failed', JSON.stringify(response));
+            logger.error('send_chat_message command failed', JSON.stringify(response));
             return;
         }
 
@@ -371,7 +375,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'client did not send the payload';
             socket.emit('play_token_response',response);
-            serverLog('play_token command failed', JSON.stringify(response));
+            logger.error('play_token command failed', JSON.stringify(response));
             return;
         }
         let player = players[socket.id];
@@ -380,7 +384,8 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'play_token came from unregistered player';
             socket.emit('play_token_response',response);
-            serverLog('play_token command failed', JSON.stringify(response));
+            logger.error('play_token command failed', JSON.stringify(response));
+            sendAlert('❗ Ход от незарегистрированного игрока', `Socket ID: ${socket.id}`);
             return;
         }
         let username = player.username;
@@ -389,7 +394,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'play_token command did not come from a registered username';
             socket.emit('play_token_response',response);
-            serverLog('play_token command failed', JSON.stringify(response));
+            logger.error('play_token command failed', JSON.stringify(response));
             return;
         }
 
@@ -399,7 +404,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'There was no valid game associated with play_token command';
             socket.emit('play_token_response',response);
-            serverLog('play_token command failed', JSON.stringify(response));
+            logger.error('play_token command failed', JSON.stringify(response));
             return;
         }
 
@@ -409,7 +414,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'There was no valid row associated with play_token command';
             socket.emit('play_token_response',response);
-            serverLog('play_token command failed', JSON.stringify(response));
+            logger.error('play_token command failed', JSON.stringify(response));
             return;
         }
 
@@ -419,7 +424,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'There was no valid column associated with play_token command';
             socket.emit('play_token_response',response);
-            serverLog('play_token command failed', JSON.stringify(response));
+            logger.error('play_token command failed', JSON.stringify(response));
             return;
         }
 
@@ -429,7 +434,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'There was no valid color associated with play_token command';
             socket.emit('play_token_response',response);
-            serverLog('play_token command failed', JSON.stringify(response));
+            logger.error('play_token command failed', JSON.stringify(response));
             return;
         }
 
@@ -439,7 +444,7 @@ io.on('connection', (socket) => {
             response.result = 'fail';
             response.message = 'There was no valid game associated with play_token command';
             socket.emit('play_token_response',response);
-            serverLog('play_token command failed', JSON.stringify(response));
+            logger.error('play_token command failed', JSON.stringify(response));
             return;
         }
 
@@ -449,7 +454,8 @@ io.on('connection', (socket) => {
                 message: "play_token played the wrong color. Incorrect turn"
             }
             socket.emit('play_token_response',response);
-            serverLog('play_token command failed', JSON.stringify(response));
+            logger.error('play_token command failed', JSON.stringify(response));
+            sendAlert('❗ Ошибка: неверный ход', `Игрок: ${username} (socket: ${socket.id})\nОжидался цвет: ${game.whose_turn}, получил: ${color}`);
             return;
         }
 
@@ -460,7 +466,7 @@ io.on('connection', (socket) => {
                 message: "play_token played the right color, but wrong player"
             }
             socket.emit('play_token_response',response);
-            serverLog('play_token command failed', JSON.stringify(response));
+            logger.error('play_token command failed', JSON.stringify(response));
             return;
         }
 
@@ -555,7 +561,7 @@ function adjacent_support(who, dr, dc, r, c, board){
         other = 'b';
     }
     else{
-        log("Problem with whose turn");
+        logger.error("Problem with whose turn");
         return false;
     }
 
@@ -635,7 +641,7 @@ function flip_tokens(who, row, col, board){
 
 function send_game_update(socket, game_id, message){
     if ((typeof games[game_id] == "undefined") || (games[game_id] === null)){
-        console.log("No game exists with game id:" + game_id + ". Making a new game for " + socket.id);
+        logger.info("No game exists with game id:" + game_id + ". Making a new game for " + socket.id);
         games[game_id] = create_new_game();
     }
 
@@ -647,17 +653,17 @@ function send_game_update(socket, game_id, message){
             if ((games[game_id].player_white.socket !== first) &&
                 (games[game_id].player_black.socket !== first)){
                     if (games[game_id].player_white.socket === ""){
-                        console.log("White player is assigned to: " + first);
+                        logger.info("White player is assigned to: " + first);
                         games[game_id].player_white.socket = first;
                         games[game_id].player_white.username = players[first].username;
                     }
                     else if (games[game_id].player_black.socket === ""){
-                        console.log("Black player is assigned to: " + first);
+                        logger.info("Black player is assigned to: " + first);
                         games[game_id].player_black.socket = first;
                         games[game_id].player_black.username = players[first].username;
                     }
                     else{
-                        console.log("Kicking " + first + " out of game: " + game_id);
+                        logger.info("Kicking " + first + " out of game: " + game_id);
                         io.in(first).socketsLeave([game_id]);
                     }
                 }
@@ -668,17 +674,17 @@ function send_game_update(socket, game_id, message){
             if ((games[game_id].player_white.socket !== second) &&
                 (games[game_id].player_black.socket !== second)){
                     if (games[game_id].player_white.socket === ""){
-                        console.log("White player is assigned to: " + second);
+                        logger.info("White player is assigned to: " + second);
                         games[game_id].player_white.socket = second;
                         games[game_id].player_white.username = players[second].username;
                     }
                     else if (games[game_id].player_black.socket === ""){
-                        console.log("Black player is assigned to: " + second);
+                        logger.info("Black player is assigned to: " + second);
                         games[game_id].player_black.socket = second;
                         games[game_id].player_black.username = players[second].username;
                     }
                     else{
-                        console.log("Kicking " + second + " out of game: " + game_id);
+                        logger.info("Kicking " + second + " out of game: " + game_id);
                         io.in(second).socketsLeave([game_id])
                     }
                 }
@@ -732,4 +738,15 @@ function send_game_update(socket, game_id, message){
             });
         })(game_id), 60 * 60 * 1000);
     }
+
+    process.on('uncaughtException', (err) => {
+        logger.error('Uncaught Exception:', err);
+        sendAlert('❗ Uncaught Exception', err.stack);
+    });
+
+    process.on('unhandledRejection', (reason, promise) => {
+        logger.error('Unhandled Rejection:', reason);
+        sendAlert('❗ Unhandled Rejection', JSON.stringify(reason));
+    });
+
 }
