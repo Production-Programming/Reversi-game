@@ -1,6 +1,82 @@
 let static = require('node-static');
-
 let http = require('http');
+let { Pool } = require('pg');
+const bcrypt = require('bcrypt');
+const validator = require('validator');
+
+const pool = new Pool({
+     user: 'admin',
+     host: 'dpg-d0lmhcffte5s739m1ri0-a.frankfurt-postgres.render.com',
+     database: 'reversi',
+     password: 'aaQoPC71ppliF1uq3bMSkDd23jXCA31Z',
+     port: 5432,
+     ssl: true,
+});
+
+async function getUserByUsername(username) {
+    try {
+      const client = await pool.connect();
+      const result = await client.query('SELECT * FROM public.users WHERE username = \'' + username + '\'');
+      console.log(result.rows);
+      client.release();
+      return result.rows;
+    } catch (err) {
+      console.error('Error:', err);
+      return null;
+    }
+}
+
+async function addUser(user) {
+    try {
+      const client = await pool.connect();
+      const result = await pool.query('INSERT INTO public.users (username, first_name, last_name, password, email) VALUES ($1, $2, $3, $4, $5) RETURNING *', [user.username, user.first_name, user.last_name, await bcrypt.hash(user.password, 10), user.email]);
+      console.log(result.rows);
+      client.release();
+      return result.rows;
+    } catch (err) {
+      console.error('Error:', err);
+      return null;
+    }
+}
+
+async function changeUser(user) {
+    try {
+      const client = await pool.connect();
+      const result = await pool.query('UPDATE public.users SET first_name=$1, last_name=$2, password=$3, email=$4 WHERE username=$5 RETURNING *', [user.first_name, user.last_name, user.password, user.email, user.username]);
+      console.log(result.rows);
+      client.release();
+      return result.rows;
+    } catch (err) {
+      console.error('Error:', err);
+      return null;
+    }
+}
+
+async function getUserGames(username){
+    try {
+        const client = await pool.connect();
+        const result = await client.query('SELECT * FROM public.games WHERE first_player = \'' + username + '\' OR second_player = \'' + username+ '\' ORDER BY date DESC');
+        console.log(result.rows);
+        client.release();
+        return result.rows;
+      } catch (err) {
+        console.error('Error:', err);
+        return null;
+      }
+}
+
+async function addGame(game) {
+    try {
+      const client = await pool.connect();
+      const result = await pool.query('INSERT INTO public.games (game_id, date, first_player, second_player, winner, first_player_points, second_player_points) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [game.game_id, game.date, game.first_player, game.second_player, game.winner, game.first_player_points, game.second_player_points]);
+      console.log(result.rows);
+      client.release();
+      return result.rows;
+    } catch (err) {
+      console.error('Error:', err);
+      return null;
+    }
+}
 
 if ((typeof port == 'undefined') || (port === null)) {
     port = 8080;
@@ -37,6 +113,197 @@ io.on('connection', (socket) => {
     }
 
     serverLog('a page connected to the server: '+socket.id);
+
+    socket.on('add_user', async (payload) => {
+        serverLog('Server received a command','\'add_user\'', JSON.stringify(payload));
+        if ((typeof payload == 'undefined') || (payload === null)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'client did not send the payload';
+            socket.emit('add_user_response', response);
+            serverLog('add user command failed', JSON.stringify(response));
+            return;
+        }
+
+        if ((typeof payload.username == 'undefined') || validator.isEmpty(payload.username)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'Поле "Логин" является обязательным. Заполните его и попробуйте еще раз.';
+            socket.emit('add_user_response', response);
+            serverLog('add user command failed', JSON.stringify(response));
+            return;
+        }
+
+        if ((typeof payload.username == 'undefined') || validator.isEmpty(payload.first_name)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'Поле "Имя" является обязательным. Заполните его и попробуйте еще раз.';
+            socket.emit('add_user_response', response);
+            serverLog('add user command failed', JSON.stringify(response));
+            return;
+        }
+
+        if ((typeof payload.username == 'undefined') || validator.isEmpty(payload.last_name)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'Поле "Фамилия" является обязательным. Заполните его и попробуйте еще раз.';
+            socket.emit('add_user_response', response);
+            serverLog('add user command failed', JSON.stringify(response));
+            return;
+        }
+
+        if ((typeof payload.username == 'undefined') || validator.isEmpty(payload.password)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'Поле "Пароль" является обязательным. Заполните его и попробуйте еще раз.';
+            socket.emit('add_user_response', response);
+            serverLog('add user command failed', JSON.stringify(response));
+            return;
+        }
+
+        if ((typeof payload.username == 'undefined') || (!validator.isEmpty(payload.email) && !validator.isEmail(payload.email))) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'Поле "Почта" заполнено неверно. Попробуйте еще раз.';
+            socket.emit('add_user_response', response);
+            serverLog('add user command failed', JSON.stringify(response));
+            return;
+        }
+
+        let check = await getUserByUsername(payload.username);
+        if (check !== null && check.length > 0){
+            response = {
+                result:'fail',
+                message:'Пользователь с таким логином уже существует!'
+            }
+            socket.emit('add_user_response', response);
+            serverLog('add_user command failed', JSON.stringify(response));
+            return;
+        }
+
+        let result = await addUser(payload);
+        if (result === null || result.length === 0){
+            response = {
+                result:'fail',
+                message:'Ошибка при добавлении пользователя. Попробуйте еще раз позже!'
+            }
+            socket.emit('add_user_response', response);
+            serverLog('add_user command failed', JSON.stringify(response));
+            return;
+        }
+
+        response = {
+            result:'success',
+            message:'Пользователь с именем' + payload.username + 'успешно зарегистрирован!',
+            username: payload.username
+        }
+        socket.emit('add_user_response', response);
+    });
+
+    socket.on('login', async (payload) => {
+        serverLog('Server received a command','\'login\'', JSON.stringify(payload));
+        if ((typeof payload == 'undefined') || (payload === null)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'client did not send the payload';
+            socket.emit('login_response', response);
+            serverLog('login command failed', JSON.stringify(response));
+            return;
+        }
+
+        let result = await getUserByUsername(payload.username);
+        if (result === null || result.length === 0){
+            response = {
+                result:'fail',
+                message:'Неверный логин. Попробуйте еще раз!'
+            }
+            socket.emit('login_response', response);
+            serverLog('login command failed', JSON.stringify(response));
+            return;
+        }
+
+        if (!await bcrypt.compare(payload.password, result[0].password)){
+            response = {
+                result:'fail',
+                message:'Неверный пароль. Попробуйте еще раз!'
+            }
+            socket.emit('login_response', response);
+            serverLog('login command failed', JSON.stringify(response));
+            return;
+        }
+
+        response = {
+            result:'success',
+            message:'Пользователь с именем' + payload.username + 'успешно авторизован!',
+            username: payload.username
+        }
+        socket.emit('login_response', response);
+    });
+
+    socket.on('change_user', async (payload) => {
+        serverLog('Server received a command','\'change_user\'', JSON.stringify(payload));
+        if ((typeof payload == 'undefined') || (payload === null)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'client did not send the payload';
+            socket.emit('change_user_response', response);
+            serverLog('cahnge_user command failed', JSON.stringify(response));
+            return;
+        }
+
+        if ((typeof payload.first_name == 'undefined') || validator.isEmpty(payload.first_name)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'Поле "Имя" является обязательным. Заполните его и попробуйте еще раз.';
+            socket.emit('change_user_response', response);
+            serverLog('change_user command failed', JSON.stringify(response));
+            return;
+        }
+
+        if ((typeof payload.last_name == 'undefined') || validator.isEmpty(payload.last_name)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'Поле "Фамилия" является обязательным. Заполните его и попробуйте еще раз.';
+            socket.emit('change_user_response', response);
+            serverLog('change_user command failed', JSON.stringify(response));
+            return;
+        }
+
+        if ((typeof payload.email == 'undefined') || (!validator.isEmpty(payload.email) && !validator.isEmail(payload.email))) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'Поле "Почта" заполнено неверно. Попробуйте еще раз.';
+            socket.emit('change_user_response', response);
+            serverLog('change_user command failed', JSON.stringify(response));
+            return;
+        }
+
+        let user = await getUserByUsername(payload.username);
+
+        if ((typeof payload.password == 'undefined') || validator.isEmpty(payload.password)){
+            payload.password = user[0].password;
+        }
+        else{
+            payload.password = await bcrypt.hash(payload.password, 10);
+        }
+
+        let result = await changeUser(payload);
+        if (result === null || result.length === 0){
+            response = {
+                result:'fail',
+                message:'Ошибка при обновлении пользователя. Попробуйте еще раз позже!'
+            }
+            socket.emit('change_user_response', response);
+            serverLog('change_user command failed', JSON.stringify(response));
+            return;
+        }
+
+        response = {
+            result:'success',
+            user: result[0]
+        }
+        socket.emit('change_user_response', response);
+    });
 
     socket.on('invite', (payload) => {
         serverLog('Server received a command','\'invite\'',JSON.stringify(payload));
@@ -363,7 +630,7 @@ io.on('connection', (socket) => {
         serverLog('send_chat_message succeeded', JSON.stringify(response));
     });
 
-    socket.on('play_token', (payload) => {
+    socket.on('play_token', async (payload) => {
         serverLog('Server received a command','\'play_token\'',JSON.stringify(payload));
         let response = {};
         if ((typeof payload == 'undefined') || (payload === null)) {
@@ -483,7 +750,133 @@ io.on('connection', (socket) => {
         let d = new Date();
         game.last_move_time = d.getTime();
 
-        send_game_update(socket, game_id, 'played a token');
+        await send_game_update(socket, game_id, 'played a token');
+    });
+
+    socket.on('game_over', async (payload) => {
+        serverLog('Server received a command','\'game_over\'',JSON.stringify(payload));
+        if ((typeof payload == 'undefined') || (payload === null)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'client did not send the payload';
+            socket.emit('game_over_response',response);
+            serverLog('game_over command failed', JSON.stringify(response));
+            return;
+        }
+
+        winner = games[payload.game_id].player_white.username;
+
+        if (winner === payload.username){
+            winner = games[payload.game_id].player_black.username;
+        }
+
+        let white_points = 0;
+        let black_points = 0;
+
+        for (let row = 0; row < 8; row++){
+            for (let col = 0; col < 8; col++){
+                if (games[payload.game_id].board[row][col] == 'w'){
+                    white_points += 1;
+                }
+                if (games[payload.game_id].board[row][col] == 'b'){
+                    black_points += 1;
+                }
+            }
+        }
+
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        let game_info = {};
+        game_info.game_id = payload.game_id;
+        game_info.date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        game_info.first_player = games[payload.game_id].player_white.username;
+        game_info.second_player = games[payload.game_id].player_black.username;
+        game_info.winner = winner;
+        game_info.first_player_points = white_points;
+        game_info.second_player_points = black_points;
+
+        let result = await addGame(game_info);
+        if (result === null || result.length === 0){
+            response = {
+                result:'fail',
+                message:'К сожалению, произошла ошибка при сохранении игры. Результат не зафиксирован.'
+            }
+            io.in(payload.game_id).emit('game_over_response', response);
+            serverLog('game_over command failed', JSON.stringify(response));
+            return;
+        }
+
+        let response = {
+            result: 'success',
+            game_id: payload.game_id,
+            game: games[payload.game_id],
+            who_won: winner
+        }
+        io.in(payload.game_id).emit('game_over_response', response);
+    });
+
+    socket.on('get_user', async (payload) => {
+        serverLog('Server received a command','\'get_user\'',JSON.stringify(payload));
+        if ((typeof payload == 'undefined') || (payload === null)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'client did not send the payload';
+            socket.emit('get_user_response',response);
+            serverLog('get_user command failed', JSON.stringify(response));
+            return;
+        }
+
+        let result = await getUserByUsername(payload);
+        if (result === null || result.length === 0){
+            response = {
+                result:'fail',
+                message:'Ошибка сервера. Не удалось загрузить данные пользователя.'
+            }
+            socket.emit('get_user_response', response);
+            serverLog('get_user command failed', JSON.stringify(response));
+            return;
+        }
+
+        let response = {
+            result: 'success',
+            user: result[0],
+        }
+        socket.emit('get_user_response', response);
+    });
+
+    socket.on('get_games', async (payload) => {
+        serverLog('Server received a command','\'get_games\'',JSON.stringify(payload));
+        if ((typeof payload == 'undefined') || (payload === null)) {
+            response = {};
+            response.result = 'fail';
+            response.message = 'client did not send the payload';
+            socket.emit('get_games_response',response);
+            serverLog('get_games command failed', JSON.stringify(response));
+            return;
+        }
+
+        let result = await getUserGames(payload);
+        if (result === null || result.length === 0){
+            response = {
+                result:'fail',
+                message:'Ошибка сервера. Не удалось выгрузить игры.'
+            }
+            socket.emit('get_games_response', response);
+            serverLog('get_games command failed', JSON.stringify(response));
+            return;
+        }
+
+        let response = {
+            result: 'success',
+            games: result,
+        }
+        socket.emit('get_games_response', response);
     });
 });
 
@@ -633,7 +1026,7 @@ function flip_tokens(who, row, col, board){
     moveDirections.forEach((direction) => flip_line(who, direction.row, direction.col, row, col, board));
 }
 
-function send_game_update(socket, game_id, message){
+async function send_game_update(socket, game_id, message){
     if ((typeof games[game_id] == "undefined") || (games[game_id] === null)){
         console.log("No game exists with game id:" + game_id + ". Making a new game for " + socket.id);
         games[game_id] = create_new_game();
@@ -718,13 +1111,47 @@ function send_game_update(socket, game_id, message){
         if (whitesum < blacksum){
             winner = games[game_id].player_black.username;
         }
+
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        let game_info = {};
+        game_info.game_id = game_id;
+        game_info.date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        game_info.first_player = games[game_id].player_white.username;
+        game_info.second_player = games[game_id].player_black.username;
+        game_info.winner = winner;
+        game_info.first_player_points = whitesum;
+        game_info.second_player_points = blacksum;
+
+        let result = await addGame(game_info);
+        if (result === null || result.length === 0){
+            response = {
+                result:'fail',
+                message:'К сожалению, произошла ошибка при сохранении игры. Результат не зафиксирован.'
+            }
+            io.in(game_id).emit('game_over_response', response);
+            serverLog('game_over command failed', JSON.stringify(response));
+            setTimeout(((id) => {
+                return (() => {
+                    delete games[id];
+                });
+            })(game_id), 60 * 60 * 1000);
+            return;
+        }
+
         let payload = {
             result: 'success',
             game_id: game_id,
             game: games[game_id],
             who_won: winner
         }
-        io.in(game_id).emit('game_over', payload);
+        io.in(game_id).emit('game_over_response', payload);
 
         setTimeout(((id) => {
             return (() => {

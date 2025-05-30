@@ -34,6 +34,10 @@ body {
     color: rgb(247, 236, 236);
 }
 
+.local-btn{
+    width: 30%;
+}
+
 #displayName {
     margin-left: 10px;
 }
@@ -43,3 +47,10 @@ body {
     border-color: #47b160;
     color: rgb(247, 236, 236);
 }
+
+#userInfo { 
+    background: transparent url(../images/user.png) no-repeat;
+    background-size: contain;
+    width: 40px;
+    height: 100%;
+}  
