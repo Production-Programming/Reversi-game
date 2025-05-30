@@ -12,6 +12,53 @@ function getParameterValue(requestedKey) {
     return null;
 }
 
+function goToMenuRegistration(){
+    let user = {};
+    user.username = encodeURI($('#loginInput').val());
+    user.first_name = encodeURI($('#nameInput').val());
+    user.last_name = encodeURI($('#surnameInput').val());
+    user.password = encodeURI($('#passwordInput').val());
+    user.email = encodeURI($('#emailInput').val());
+
+    socket.emit('add_user',user);
+}
+
+function goToMenuLogin(){
+    let user_info = {};
+    user_info.username = encodeURI($('#loginInput').val());
+    user_info.password = encodeURI($('#passwordInput').val());
+    
+    socket.emit('login', user_info);
+}
+
+function goToLobby(){
+    window.location.href = "lobby.html?username="+username;
+}
+
+function goToLocalGame(){
+    window.location.href = "local-game.html?username="+username;
+}
+
+function finishGame(){
+    let payload = {
+        result: 'success',
+        game_id: chatRoom,
+        username: username
+    }
+    socket.emit('game_over', payload);
+}
+
+function changeUser(){
+    let user = {};
+    user.username = username;
+    user.first_name = encodeURI($('#nameInput').val());
+    user.last_name = encodeURI($('#surnameInput').val());
+    user.password = encodeURI($('#passwordInput').val());
+    user.email = encodeURI($('#emailInput').val());
+
+    socket.emit('change_user', user);
+}
+
 let username = decodeURI(getParameterValue('username'));
 if ((typeof username == 'undefined') || (username === null) || (username === 'null') || (username === "")) {
     username = "Anonymous_" + Math.floor(Math.random()*1000);
@@ -75,6 +122,74 @@ function makeStartGameButton(){
     return newNode;
 }
 
+socket.on('add_user_response', (payload) =>{
+    if(( typeof payload == 'undefined') || (payload === null)){
+        console.log('Server did not send a user info');
+        return;
+    }
+    if(payload.result === 'fail'){
+        console.log(payload.message);
+        Swal.fire({
+            text: payload.message,
+            confirmButtonColor: '#42724e',
+            confirmButtonText: 'ок',
+    
+        })
+        return;
+    }
+    else{
+        console.log(payload.message);
+        window.location.href = "menu.html?username="+payload.username;
+    }
+});
+
+socket.on('login_response', (payload) =>{
+    if(( typeof payload == 'undefined') || (payload === null)){
+        console.log('Server did not send a user info');
+        return;
+    }
+    if(payload.result === 'fail'){
+        console.log(payload.message);
+        Swal.fire({
+            text: payload.message,
+            confirmButtonColor: '#42724e',
+            confirmButtonText: 'ок',
+    
+        })
+        return;
+    }
+    else{
+        console.log(payload.message);
+        window.location.href = "menu.html?username="+payload.username;
+    }
+});
+
+socket.on('change_user_response', (payload) =>{
+    if(( typeof payload == 'undefined') || (payload === null)){
+        console.log('Server did not send a user info');
+        return;
+    }
+    if(( typeof payload == 'undefined') || (payload === null)){
+        console.log('Server did not send a payload');
+        return;
+    }
+    if(payload.result === 'fail'){
+        console.log(payload.message);
+        Swal.fire({
+            text: payload.message,
+            confirmButtonColor: '#42724e',
+            confirmButtonText: 'ок',
+        });
+        return;
+    }
+    else{
+        Swal.fire({
+            text: "Данные успешно изменены.",
+            confirmButtonColor: '#42724e',
+            confirmButtonText: 'ок',
+        });
+    }
+});
 
 socket.on('invite_response', (payload) =>{
     if(( typeof payload == 'undefined') || (payload === null)){
@@ -177,9 +292,9 @@ socket.on('join_room_response', (payload) =>{
     $("#players").append(nodeA);
     nodeA.show("fade", 1000);
 
-    let newHTML = '<p class=\'join-room-response\'>'+payload.username+' вошел в чат. (В зале ожидания находятся '+payload.count+' человек)</p>';
+    let newHTML = '<p class=\'join-room-response\'>Пользователь '+payload.username+' вошел в чат. (В зале ожидания находятся '+payload.count+' человек)</p>';
     if (payload.room !== "зал ожидания"){
-        newHTML = '<p class=\'join-room-response\'>'+payload.username+' приесоединился к игре.</p>';
+        newHTML = '<p class=\'join-room-response\'>Пользователь '+payload.username+' приесоединился к игре.</p>';
     }
     let newNode = $(newHTML);
     newNode.hide();    
@@ -202,9 +317,9 @@ socket.on('player_disconnected', (payload) =>{
         domElements.hide("fade", 500);
     }
 
-    let newHTML = '<p class=\'left-room-response\'>'+payload.username+' покинул чат. (В зале ожидания находятся '+payload.count+' человек)</p>';
+    let newHTML = '<p class=\'left-room-response\'>Пользователь '+payload.username+' покинул чат. (В зале ожидания находятся '+payload.count+' человек)</p>';
     if (payload.room !== "зал ожидания"){
-        newHTML = '<p class=\'left-room-response\'>'+payload.username+' покинул игру.</p>';
+        newHTML = '<p class=\'left-room-response\'>Пользователь '+payload.username+' покинул игру.</p>';
     }
     let newNode = $(newHTML);
     newNode.hide();    
@@ -406,13 +521,20 @@ socket.on('play_token_response', (payload) =>{
     }
 })
 
-socket.on('game_over', (payload) =>{
+socket.on('game_over_response', (payload) =>{
     if(( typeof payload == 'undefined') || (payload === null)){
         console.log('Server did not send a payload');
         return;
     }
     if(payload.result === 'fail'){
         console.log(payload.message);
+        Swal.fire({
+            text: payload.message,
+            confirmButtonColor: '#42724e',
+            confirmButtonText: 'ок',
+        }).then(() => {
+            window.location.href = 'lobby.html?username=' + username;
+        });
         return;
     }
 
@@ -420,7 +542,7 @@ socket.on('game_over', (payload) =>{
     let url = "assets/images/draw.png";
 
     if (payload.who_won !== ""){
-        message = payload.who_won + " победил!";
+        message = "Игрок " + payload.who_won + " победил!";
         url = "assets/images/win.gif"; 
     }
 
@@ -437,21 +559,50 @@ socket.on('game_over', (payload) =>{
     });
 });
 
-$( () => {
-    let request = {};
-    request.room = chatRoom;
-    request.username = username;
-    console.log('**** Client log message, sending \'join_room\' command: '+JSON.stringify(request));
-    socket.emit('join_room',request);
+socket.on('get_user_response', (payload) =>{
+    if(( typeof payload == 'undefined') || (payload === null)){
+        console.log('Server did not send a payload');
+        return;
+    }
+    if(payload.result === 'fail'){
+        console.log(payload.message);
+        Swal.fire({
+            text: payload.message,
+            confirmButtonColor: '#42724e',
+            confirmButtonText: 'ок',
+        });
+        return;
+    }
 
-    $('#lobbyTitle').html(username+": зал ожидания");
-    $('#quit').attr("href", "'lobby.html?username=" + username + "' role='button'");
+    $('#loginValue').html(payload.user.username)
+    $('#nameInput').val(payload.user.first_name);
+    $('#surnameInput').val(payload.user.last_name);
+    $('#emailInput').val(payload.user.email);
+});
 
-    $('#chatMessage').keypress(function (e) {
-        let key = e.which;
-        if (key == 13) {
-            $('button[id = chatButton]').click();
-            return false;
+socket.on('get_games_response', (payload) =>{
+    if(( typeof payload == 'undefined') || (payload === null)){
+        console.log('Server did not send a payload');
+        return;
+    }
+    if(payload.result === 'fail'){
+        console.log(payload.message);
+        Swal.fire({
+            text: payload.message,
+            confirmButtonColor: '#42724e',
+            confirmButtonText: 'ок',
+        });
+        return;
+    }
+
+    var html = "<table id=\"gamesTable\"><tr><th>Дата</th><th>Игрок 1</th><th>Игрок 2</th><th>Счет</th></tr>";
+    for (let i = 0; i < payload.games.length; i++){
+        var win_class = "winner";
+        if (payload.games[i].winner !== username && payload.games[i].winner !== "" && payload.games[i].winner !== null){
+            win_class = "loser";
         }
-    });
+        html += '<tr class=\'' + win_class +'\'><td>'+payload.games[i].date.substring(0, 19).replace('T', ' ')+'</td><td>'+payload.games[i].first_player+'</td><td>'+payload.games[i].second_player+'</td><td>'+payload.games[i].first_player_points+' : '+payload.games[i].second_player_points+'</td></tr>';
+    }
+    html += "</table>";
+    $('#games').html(html);
 });

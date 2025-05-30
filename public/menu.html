@@ -15,6 +15,10 @@
                 <a class="btn variant-btn text-nowrap" href="about.html">ОБ ИГРЕ</a>
             </div>
             <div class="col text-center">
+
+                <a id="userInfo" class="btn variant-btn text-nowrap"></a>
+            </div>
+            <div class="col text-center">
                 <a class="btn variant-btn text-nowrap" href="https://ru.wikipedia.org/wiki/Реверси">ПРАВИЛА</a>
             </div>
         </div>
@@ -40,6 +44,16 @@
                     />
                     <button type="submit" class="btn btn-primary text-nowrap ms-2" id="lobbyButton" onclick="goToLobby()">ВОЙТИ В ЗАЛ</button>
                 </div>
+
+        <div class="row m-3">
+            <div class="col text-center">
+                <button class="btn local-btn text-nowrap ms-2" id="lobbyButton" onclick="goToLobby()">ВОЙТИ В ЗАЛ</button>
+            </div>
+        </div>
+
+        <div class="row m-3">
+            <div class="col text-center">
+                <button class="btn local-btn text-nowrap ms-2" id="localButton" onclick="goToLocalGame()">ЛОКАЛЬНАЯ ИГРА</button>
             </div>
         </div>
 
@@ -87,5 +101,22 @@
     </script>
   </body>
 
-
+                <a class="btn local-btn text-nowrap ms-2" href="index.html">ВЫЙТИ</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js" integrity="sha384-SStJQoPipVtHHnIgUfDI+jTAbSyU+HMbhwt2XRRNpLIRFg9VguopT6Y4+cdOlkqg" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/menu.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.21.2/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.21.2/dist/sweetalert2.min.css
+    " rel="stylesheet">
+  </body>
 </html>
