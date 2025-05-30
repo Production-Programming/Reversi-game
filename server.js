@@ -55,7 +55,7 @@ async function changeUser(user) {
 async function getUserGames(username){
     try {
         const client = await pool.connect();
-        const result = await client.query('SELECT * FROM public.games WHERE first_player = \'' + username + '\' OR second_player = \'' + username+ '\'');
+        const result = await client.query('SELECT * FROM public.games WHERE first_player = \'' + username + '\' OR second_player = \'' + username+ '\' ORDER BY date DESC');
         console.log(result.rows);
         client.release();
         return result.rows;

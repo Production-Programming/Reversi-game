@@ -601,7 +601,7 @@ socket.on('get_games_response', (payload) =>{
         if (payload.games[i].winner !== username && payload.games[i].winner !== "" && payload.games[i].winner !== null){
             win_class = "loser";
         }
-        html += '<tr class=\'' + win_class +'\'><td>'+payload.games[i].date+'</td><td>'+payload.games[i].first_player+'</td><td>'+payload.games[i].second_player+'</td><td>'+payload.games[i].first_player_points+' : '+payload.games[i].second_player_points+'</td></tr>';
+        html += '<tr class=\'' + win_class +'\'><td>'+payload.games[i].date.substring(0, 19).replace('T', ' ')+'</td><td>'+payload.games[i].first_player+'</td><td>'+payload.games[i].second_player+'</td><td>'+payload.games[i].first_player_points+' : '+payload.games[i].second_player_points+'</td></tr>';
     }
     html += "</table>";
     $('#games').html(html);
