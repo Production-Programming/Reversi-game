@@ -1,6 +1,21 @@
+function getParameterValue(requestedKey) {
+  let pageIRI = window.location.search.substring(1);
+  let pageIRIVariables = pageIRI.split('&');
+  for (let i = 0; i < pageIRIVariables.length; i++) {
+      let data = pageIRIVariables[i].split('=');
+      let key = data[0];
+      let value = data[1];
+      if (key === requestedKey) {
+          return value;
+      }
+  }
+  return null;
+}
+
 $(document).ready(() => {
 
     let game_started = false;
+    $("#p1-nickname").html(decodeURI(getParameterValue('username')));
   
     checkOrientation();
     $(window).on("orientationchange", checkOrientation);
@@ -44,8 +59,7 @@ $(document).ready(() => {
   
       $("#start_game").on("click", () => {
   
-        if ($("#p1-nickname").val() != "") 
-          game_info.p1_nick = $("#p1-nickname").val();
+        game_info.p1_nick = decodeURI(getParameterValue('username'));
         
         if ($("#p2-nickname").val() != "") 
           game_info.p2_nick = $("#p2-nickname").val();

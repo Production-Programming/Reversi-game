@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.rtl.min.css" integrity="sha384-q8+l9TmX3RaSz3HKGBmqP2u5MkgeN7HrfOJBLcTgZsQsbrx8WqqxdA5PuwUV9WIx" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/user.css">
+    <title>Othello: lobby</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <div class="row m-3 header-row">
+            <div class="title-wrap text-center">
+                <h3 id = "userTitle">Личный кабинет</h3>
+            </div>
+            <div class="menu-wrap">
+                <a id="menu"></a>
+            </div>
+        </div>
+        <div class="row m-3">
+            <div class="col-md-4 text-center ms-2" id="colorUser">
+                <h4 id="sectionTitle">Информация о пользователе</h4>
+                <div class="input-group">
+                    <span class="input-group-text form-field" id="login">Логин</span>
+                    <span id="loginValue"></span>
+                </div>
+    
+                <div class="input-group">
+                    <span class="input-group-text form-field" id="name">Имя</span>
+                    <input type="text" class="form-control text-nowrap input-field" id="nameInput" placeholder="Введите новое имя" 
+                    aria-label="Введите свое имя" aria-describedby="name"
+                    />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text form-field" id="surname">Фамилия</span>
+                    <input type="text" class="form-control text-nowrap input-field" id="surnameInput" placeholder="Введите новую фамилию" 
+                    aria-label="Введите свою фамилию" aria-describedby="surname"
+                    />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text form-field" id="password">Пароль</span>
+                    <input type="text" class="form-control text-nowrap input-field" id="passwordInput" placeholder="Введите новый пароль" 
+                    aria-label="Введите свой пароль" aria-describedby="password"
+                    />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text form-field" id="email">Почта</span>
+                    <input type="text" class="form-control text-nowrap input-field" id="emailInput" placeholder="Введите свою почту" 
+                    aria-label="Введите свою почту" aria-describedby="email"
+                    />
+                </div>
+                <button type="submit" class="btn btn-primary text-nowrap green-btn" onclick="changeUser()">Изменить</button>
+            </div>
+            
+            <div class="col" id="gamesBorder">
+                <div>
+                    <h4 id="sectionTitle"> Игры</h4>
+                </div>
+                <div id="games">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js" integrity="sha384-SStJQoPipVtHHnIgUfDI+jTAbSyU+HMbhwt2XRRNpLIRFg9VguopT6Y4+cdOlkqg" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/user.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.21.2/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.21.2/dist/sweetalert2.min.css
+    " rel="stylesheet">
+</body>
+</html>
