@@ -397,6 +397,9 @@ class Game {
             
             if (result.isConfirmed) 
                 this.newGame(this._board._board_length);
+            else{
+                window.location.href = 'menu.html?username=' + decodeURI(getParameterValue('username'));
+            }
 
         });
 

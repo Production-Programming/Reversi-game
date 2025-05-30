@@ -13,16 +13,29 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
     </script>
 
-    <title>Otello: login</title>
+    <title>Otello: registration</title>
 </head>
 <body>
     <div class="container">
         <div id="border">
-            <div class="header">Войти</div>
+            <div class="header">Регистрация</div>
             <div class="input-group">
                 <span class="input-group-text form-field" id="login">Логин</span>
                 <input type="text" class="form-control text-nowrap input-field" id="loginInput" placeholder="Введите свой никнейм" 
                 aria-label="Введите свой никнейм" aria-describedby="login"
+                />
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-text form-field" id="name">Имя</span>
+                <input type="text" class="form-control text-nowrap input-field" id="nameInput" placeholder="Введите свое имя" 
+                aria-label="Введите свое имя" aria-describedby="name"
+                />
+            </div>
+            <div class="input-group">
+                <span class="input-group-text form-field" id="surname">Фамилия</span>
+                <input type="text" class="form-control text-nowrap input-field" id="surnameInput" placeholder="Введите свою фамилию" 
+                aria-label="Введите свою фамилию" aria-describedby="surname"
                 />
             </div>
             <div class="input-group">
@@ -31,8 +44,14 @@
                 aria-label="Введите свой пароль" aria-describedby="password"
                 />
             </div>
-            <button type="submit" class="btn btn-primary text-nowrap green-btn" id="menuButton" onclick="goToMenuLogin()">Войти</button>
-            <div class="registration">Нет аккаунта? <a href="registration.html" class="auth-link">Зарегистрироваться</a></div>
+            <div class="input-group">
+                <span class="input-group-text form-field" id="email">Почта</span>
+                <input type="text" class="form-control text-nowrap input-field" id="emailInput" placeholder="Введите свою почту" 
+                aria-label="Введите свою почту" aria-describedby="email"
+                />
+            </div>
+            <button type="submit" class="btn btn-primary text-nowrap green-btn" id="regButton" onclick="goToMenuRegistration()">Зарегистрироваться</button>
+            <div class="log-in">Есть аккаунт? <a href="index.html" class="auth-link">Войти</a></div>
         </div>
     </div>
 
