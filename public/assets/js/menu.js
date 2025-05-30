@@ -1,5 +1,6 @@
 $( () => {
     $('#userInfo').attr("href", "user.html?username=" + username);
+    $('#aboutPage').attr("href", "about.html?username=" + username);
 });
 
 fetch('https://dummyjson.com/quotes/random')
