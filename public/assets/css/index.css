@@ -53,4 +53,23 @@ body {
     background-size: contain;
     width: 40px;
     height: 100%;
+
 }  
+
+#quoteBox, #countryInfo {
+  font-size: 1rem;          
+  font-weight: 400;        
+  margin-top: 15px;        
+  margin-bottom: 10px;
+  color: #333;
+  font-style: italic;
+  padding: 10px 15px;
+  border-left: 4px solid #42724e;
+  border-right: 4px solid #42724e;
+  background-color: #fff9f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  max-width: fit-content;    
+  margin-left: auto;        
+  margin-right: auto;
+}
