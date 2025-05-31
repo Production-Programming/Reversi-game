@@ -135,10 +135,10 @@ describe("Game integration tests", function() {
         assert.equal(game.getCell(4, 5).piece, "black");
         assert.equal(game.getCell(5, 4).piece, "black");
 
-        assert.equal(game.possibleMoves.find(cell => cell.row === 3 && cell.col === 5).id, '3-5');
-        assert.equal(game.possibleMoves.find(cell => cell.row === 4 && cell.col === 6).id, '4-6');
-        assert.equal(game.possibleMoves.find(cell => cell.row === 5 && cell.col === 3).id, '5-3');
-        assert.equal(game.possibleMoves.find(cell => cell.row === 6 && cell.col === 4).id, '6-4');
+        assert.equal(game.possibleMoves.find(cell => cell.row === 3 && cell.col === 4).id, '3-4');
+        assert.equal(game.possibleMoves.find(cell => cell.row === 4 && cell.col === 3).id, '4-3');
+        assert.equal(game.possibleMoves.find(cell => cell.row === 5 && cell.col === 6).id, '5-6');
+        assert.equal(game.possibleMoves.find(cell => cell.row === 6 && cell.col === 5).id, '6-5');
 
         for (let row = 1; row <= game.board.length; row++) {
           for (let col = 1; col <= game.board.length; col++) {
@@ -153,10 +153,10 @@ describe("Game integration tests", function() {
       let game = new Game(player1, player2);
 
       game.newGame(8, false);
-      assert.equal(game.turn, player1);
-      
-      game.placePiece(6, 4, false);
       assert.equal(game.turn, player2);
+      
+      game.placePiece(3, 4, false);
+      assert.equal(game.turn, player1);
     });
 
     it('Change color Up', function () {
@@ -164,9 +164,9 @@ describe("Game integration tests", function() {
       
         game.newGame(8, false);
 
-        game.placePiece(6, 4, false);
+        game.placePiece(3, 4, false);
 
-        assert.equal(game.getCell(5, 4).piece, "white");
+        assert.equal(game.getCell(4, 4).piece, "black");
     });
 
     it('Change color Down', function () {
@@ -174,9 +174,9 @@ describe("Game integration tests", function() {
     
       game.newGame(8, false);
 
-      game.placePiece(3, 5, false);
+      game.placePiece(6, 5, false);
 
-      assert.equal(game.getCell(4, 5).piece, "white");
+      assert.equal(game.getCell(5, 5).piece, "black");
     });
 
     it('Change color Right', function () {
@@ -184,9 +184,9 @@ describe("Game integration tests", function() {
     
       game.newGame(8, false);
 
-      game.placePiece(5, 3, false);
+      game.placePiece(5, 6, false);
 
-      assert.equal(game.getCell(5, 4).piece, "white");
+      assert.equal(game.getCell(5, 5).piece, "black");
     });
 
     it('Change color Left', function () {
@@ -194,9 +194,9 @@ describe("Game integration tests", function() {
     
       game.newGame(8, false);
 
-      game.placePiece(4, 6, false);
+      game.placePiece(4, 3, false);
 
-      assert.equal(game.getCell(4, 5).piece, "white");
+      assert.equal(game.getCell(4, 4).piece, "black");
     });
 
     it('Change color Up Right', function () {
@@ -204,9 +204,11 @@ describe("Game integration tests", function() {
     
       game.newGame(8, false);
 
+      game.placePiece(3, 4, false);
       game.placePiece(3, 5, false);
       game.placePiece(3, 6, false);
 
+      assert.equal(game.getCell(3, 5).piece, "black");
       assert.equal(game.getCell(4, 5).piece, "black");
     });
 
@@ -215,10 +217,12 @@ describe("Game integration tests", function() {
     
       game.newGame(8, false);
 
+      game.placePiece(6, 5, false);
       game.placePiece(6, 4, false);
       game.placePiece(6, 3, false);
 
       assert.equal(game.getCell(5, 4).piece, "black");
+      assert.equal(game.getCell(6, 4).piece, "black");
     });
   
     it('Change color Up Left', function () {
@@ -226,11 +230,9 @@ describe("Game integration tests", function() {
     
       game.newGame(8, false);
 
-      game.placePiece(3, 5, false);
       game.placePiece(3, 4, false);
       game.placePiece(3, 3, false);
 
-      assert.equal(game.getCell(3, 4).piece, "white");
       assert.equal(game.getCell(4, 4).piece, "white");
     });
 
@@ -239,12 +241,10 @@ describe("Game integration tests", function() {
     
       game.newGame(8, false);
 
-      game.placePiece(6, 4, false);
       game.placePiece(6, 5, false);
       game.placePiece(6, 6, false);
 
       assert.equal(game.getCell(5, 5).piece, "white");
-      assert.equal(game.getCell(6, 5).piece, "white");
     });
   
 });
