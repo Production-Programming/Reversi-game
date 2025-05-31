@@ -1,27 +1,24 @@
-const nodemailer = require('nodemailer');
+const logger = require('./logger');
+const axios = require('axios');
 
-const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'тут почта',
-        pass: 'тут пароль'
-    }
-});
+const TOPIC = 'reversi-othello';
 
 function sendAlert(subject, message) {
-    const mailOptions = {
-        from: '"Game Server Monitor" <тут почта>',
-        to: 'тут почта',
-        subject: subject,
-        text: message
-    };
+    const url = `https://ntfy.sh/${TOPIC}`;
+    const body = `${subject}\n${message}`;
 
-    transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            console.log('Ошибка при отправке письма:', error);
-        } else {
-            console.log('Письмо отправлено:', info.response);
+    axios.post(url, body, {
+        headers: {
+            'Title': subject,  
+            'Priority': 'urgent', 
+            'Tags': 'alert, reversi-game'
         }
+    })
+    .then(() => {
+        logger.info('Уведомление отправлено через ntfy.sh');
+    })
+    .catch(err => {
+        logger.error('Ошибка отправки ntfy.sh:', err);
     });
 }
 

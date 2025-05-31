@@ -1,0 +1,385 @@
+[2025-05-31T12:11:33.823Z] [INFO] The server is running
+[2025-05-31T12:11:34.031Z] [INFO] a page connected to the server: SWheH0J8dWpkRUTcAAAB
+[2025-05-31T12:11:34.032Z] [INFO] [connection] Новый пользователь подключен: socket.id=SWheH0J8dWpkRUTcAAAB
+[2025-05-31T12:11:35.025Z] [INFO] a page connected to the server: Tqy1YcPxjJjJbBjcAAAE
+[2025-05-31T12:11:35.027Z] [INFO] [connection] Новый пользователь подключен: socket.id=Tqy1YcPxjJjJbBjcAAAE
+[2025-05-31T12:11:35.031Z] [INFO] a page connected to the server: DIeDs5d7_Sju68HpAAAF
+[2025-05-31T12:11:35.033Z] [INFO] [connection] Новый пользователь подключен: socket.id=DIeDs5d7_Sju68HpAAAF
+[2025-05-31T12:11:44.523Z] [INFO] a page connected to the server: eEKdjtWQucEERCvsAAAH
+[2025-05-31T12:11:44.528Z] [INFO] [connection] Новый пользователь подключен: socket.id=eEKdjtWQucEERCvsAAAH
+[2025-05-31T12:11:51.600Z] [INFO] Server received a command
+[2025-05-31T12:11:51.602Z] [INFO] 'login'
+[2025-05-31T12:11:51.603Z] [INFO] {"username":"Any","password":"Any"}
+[2025-05-31T12:11:51.603Z] [INFO] getUserByUsername: получение пользователя "Any"
+[2025-05-31T12:11:53.962Z] [INFO] getUserByUsername: результат - []
+[2025-05-31T12:11:53.966Z] [ERROR] login command failed
+[2025-05-31T12:11:54.405Z] [INFO] Уведомление отправлено через ntfy.sh
+[2025-05-31T12:12:03.012Z] [INFO] Server received a command
+[2025-05-31T12:12:03.017Z] [INFO] 'login'
+[2025-05-31T12:12:03.018Z] [INFO] {"username":"Mary","password":"Mary"}
+[2025-05-31T12:12:03.019Z] [INFO] getUserByUsername: получение пользователя "Mary"
+[2025-05-31T12:12:03.068Z] [INFO] getUserByUsername: результат - [{"username":"Mary","first_name":"Mary","last_name":"M","password":"$2b$10$6r6mcU/27JhvyrDeN0QFxuJ5FOVagSRRYbc.akUweRflkqJwNMzCi","email":"Mary@mail.com"}]
+[2025-05-31T12:12:03.193Z] [INFO] [login] Пользователь "Mary" успешно вошел в систему [socket.id=eEKdjtWQucEERCvsAAAH]
+[2025-05-31T12:12:03.228Z] [INFO] a page disconnected from the server: eEKdjtWQucEERCvsAAAH
+[2025-05-31T12:12:03.244Z] [INFO] a page connected to the server: eiQ2J4VkflYpKR3QAAAJ
+[2025-05-31T12:12:03.244Z] [INFO] [connection] Новый пользователь подключен: socket.id=eiQ2J4VkflYpKR3QAAAJ
+[2025-05-31T12:12:31.088Z] [INFO] a page connected to the server: CR3b9Ka6oE1KSV1XAAAL
+[2025-05-31T12:12:31.091Z] [INFO] [connection] Новый пользователь подключен: socket.id=CR3b9Ka6oE1KSV1XAAAL
+[2025-05-31T12:12:33.634Z] [INFO] a page disconnected from the server: CR3b9Ka6oE1KSV1XAAAL
+[2025-05-31T12:12:33.644Z] [INFO] a page connected to the server: 6sNVuymWSf7lgOLEAAAN
+[2025-05-31T12:12:33.647Z] [INFO] [connection] Новый пользователь подключен: socket.id=6sNVuymWSf7lgOLEAAAN
+[2025-05-31T12:12:42.548Z] [INFO] Server received a command
+[2025-05-31T12:12:42.551Z] [INFO] 'add_user'
+[2025-05-31T12:12:42.551Z] [INFO] {"username":"","first_name":"M","last_name":"M","password":"M","email":"M"}
+[2025-05-31T12:12:42.553Z] [ERROR] add user command failed
+[2025-05-31T12:12:42.981Z] [INFO] Уведомление отправлено через ntfy.sh
+[2025-05-31T12:12:57.051Z] [INFO] Server received a command
+[2025-05-31T12:12:57.053Z] [INFO] 'add_user'
+[2025-05-31T12:12:57.055Z] [INFO] {"username":"M","first_name":"M","last_name":"M","password":"M","email":"M"}
+[2025-05-31T12:12:57.056Z] [ERROR] add user command failed
+[2025-05-31T12:12:57.467Z] [INFO] Уведомление отправлено через ntfy.sh
+[2025-05-31T12:14:09.126Z] [INFO] a page connected to the server: 6UjpYRvrzq3ZWSCaAAAP
+[2025-05-31T12:14:09.127Z] [INFO] [connection] Новый пользователь подключен: socket.id=6UjpYRvrzq3ZWSCaAAAP
+[2025-05-31T12:14:09.129Z] [INFO] a page disconnected from the server: 6sNVuymWSf7lgOLEAAAN
+[2025-05-31T12:14:23.799Z] [INFO] Server received a command
+[2025-05-31T12:14:23.802Z] [INFO] 'login'
+[2025-05-31T12:14:23.802Z] [INFO] {"username":"Emy","password":"Emy"}
+[2025-05-31T12:14:23.803Z] [INFO] getUserByUsername: получение пользователя "Emy"
+[2025-05-31T12:14:25.248Z] [INFO] getUserByUsername: результат - [{"username":"Emy","first_name":"Emy","last_name":"Emy","password":"$2b$10$z6MtGn8bOW3lg8xLZKp9TOi71f2fMsnPDN65ZlJeKfeF2roWGU9Ri","email":"Emy@mail.ru"}]
+[2025-05-31T12:14:25.362Z] [INFO] [login] Пользователь "Emy" успешно вошел в систему [socket.id=6UjpYRvrzq3ZWSCaAAAP]
+[2025-05-31T12:14:25.383Z] [INFO] a page disconnected from the server: 6UjpYRvrzq3ZWSCaAAAP
+[2025-05-31T12:14:25.423Z] [INFO] a page connected to the server: rDtnMbas8O70wtp1AAAR
+[2025-05-31T12:14:25.424Z] [INFO] [connection] Новый пользователь подключен: socket.id=rDtnMbas8O70wtp1AAAR
+[2025-05-31T12:14:29.893Z] [INFO] a page disconnected from the server: rDtnMbas8O70wtp1AAAR
+[2025-05-31T12:14:29.915Z] [INFO] a page connected to the server: JKI4lkB6o8jzK5HUAAAT
+[2025-05-31T12:14:29.918Z] [INFO] [connection] Новый пользователь подключен: socket.id=JKI4lkB6o8jzK5HUAAAT
+[2025-05-31T12:14:29.921Z] [INFO] Server received a command
+[2025-05-31T12:14:29.922Z] [INFO] 'join_room'
+[2025-05-31T12:14:29.922Z] [INFO] {"room":"зал ожидания","username":"Emy"}
+[2025-05-31T12:14:29.925Z] [INFO] [join_room] Пользователь "Emy" присоединился к комнате "зал ожидания". Участников: 1 [socket.id=JKI4lkB6o8jzK5HUAAAT]
+[2025-05-31T12:14:29.925Z] [INFO] join_room succeeded
+[2025-05-31T12:14:29.926Z] [INFO] {"result":"success","socket_id":"JKI4lkB6o8jzK5HUAAAT","room":"зал ожидания","username":"Emy","count":1}
+[2025-05-31T12:14:32.607Z] [INFO] a page disconnected from the server: eiQ2J4VkflYpKR3QAAAJ
+[2025-05-31T12:14:32.630Z] [INFO] a page connected to the server: 2heMahEvg9csm5hmAAAV
+[2025-05-31T12:14:32.631Z] [INFO] [connection] Новый пользователь подключен: socket.id=2heMahEvg9csm5hmAAAV
+[2025-05-31T12:14:32.635Z] [INFO] Server received a command
+[2025-05-31T12:14:32.636Z] [INFO] 'join_room'
+[2025-05-31T12:14:32.636Z] [INFO] {"room":"зал ожидания","username":"Mary"}
+[2025-05-31T12:14:32.637Z] [INFO] [join_room] Пользователь "Mary" присоединился к комнате "зал ожидания". Участников: 2 [socket.id=2heMahEvg9csm5hmAAAV]
+[2025-05-31T12:14:32.638Z] [INFO] join_room succeeded
+[2025-05-31T12:14:32.638Z] [INFO] {"result":"success","socket_id":"JKI4lkB6o8jzK5HUAAAT","room":"зал ожидания","username":"Emy","count":2}
+[2025-05-31T12:14:32.638Z] [INFO] [join_room] Пользователь "Mary" присоединился к комнате "зал ожидания". Участников: 2 [socket.id=2heMahEvg9csm5hmAAAV]
+[2025-05-31T12:14:32.639Z] [INFO] join_room succeeded
+[2025-05-31T12:14:32.639Z] [INFO] {"result":"success","socket_id":"2heMahEvg9csm5hmAAAV","room":"зал ожидания","username":"Mary","count":2}
+[2025-05-31T12:14:34.499Z] [INFO] Server received a command
+[2025-05-31T12:14:34.501Z] [INFO] 'invite'
+[2025-05-31T12:14:34.501Z] [INFO] {"requested_user":"JKI4lkB6o8jzK5HUAAAT"}
+[2025-05-31T12:14:34.505Z] [INFO] invite command succeded
+[2025-05-31T12:14:34.507Z] [INFO] {"result":"success","socket_id":"2heMahEvg9csm5hmAAAV"}
+[2025-05-31T12:14:34.507Z] [INFO] [invite] Пользователь "Mary" пригласил "JKI4lkB6o8jzK5HUAAAT" в комнате "зал ожидания" [socket.id=2heMahEvg9csm5hmAAAV]
+[2025-05-31T12:14:37.465Z] [INFO] Server received a command
+[2025-05-31T12:14:37.467Z] [INFO] 'game_start'
+[2025-05-31T12:14:37.468Z] [INFO] {"requested_user":"2heMahEvg9csm5hmAAAV"}
+[2025-05-31T12:14:37.472Z] [INFO] game_start command succeded
+[2025-05-31T12:14:37.474Z] [INFO] {"result":"success","game_id":"d9353","socket_id":"2heMahEvg9csm5hmAAAV"}
+[2025-05-31T12:14:37.474Z] [INFO] [game_start] Игра запущена пользователем "Emy" с "2heMahEvg9csm5hmAAAV". game_id=d9353, room="зал ожидания", socket.id=JKI4lkB6o8jzK5HUAAAT
+[2025-05-31T12:14:37.500Z] [INFO] a page disconnected from the server: 2heMahEvg9csm5hmAAAV
+[2025-05-31T12:14:37.503Z] [INFO] player_dissconnected succeeded 
+[2025-05-31T12:14:37.504Z] [INFO] {"username":"Mary","room":"зал ожидания","count":1,"socket_id":"2heMahEvg9csm5hmAAAV"}
+[2025-05-31T12:14:37.504Z] [INFO] [disconnect] Пользователь "Mary" отключился от комнаты "зал ожидания" [socket.id=2heMahEvg9csm5hmAAAV]
+[2025-05-31T12:14:37.505Z] [INFO] a page disconnected from the server: JKI4lkB6o8jzK5HUAAAT
+[2025-05-31T12:14:37.506Z] [INFO] player_dissconnected succeeded 
+[2025-05-31T12:14:37.506Z] [INFO] {"username":"Emy","room":"зал ожидания","count":0,"socket_id":"JKI4lkB6o8jzK5HUAAAT"}
+[2025-05-31T12:14:37.506Z] [INFO] [disconnect] Пользователь "Emy" отключился от комнаты "зал ожидания" [socket.id=JKI4lkB6o8jzK5HUAAAT]
+[2025-05-31T12:14:37.529Z] [INFO] a page connected to the server: bz0sYs4oWjTT3tZ2AAAY
+[2025-05-31T12:14:37.531Z] [INFO] [connection] Новый пользователь подключен: socket.id=bz0sYs4oWjTT3tZ2AAAY
+[2025-05-31T12:14:37.536Z] [INFO] Server received a command
+[2025-05-31T12:14:37.536Z] [INFO] 'join_room'
+[2025-05-31T12:14:37.537Z] [INFO] {"room":"d9353","username":"Mary"}
+[2025-05-31T12:14:37.538Z] [INFO] [join_room] Пользователь "Mary" присоединился к комнате "d9353". Участников: 1 [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:14:37.538Z] [INFO] join_room succeeded
+[2025-05-31T12:14:37.538Z] [INFO] {"result":"success","socket_id":"bz0sYs4oWjTT3tZ2AAAY","room":"d9353","username":"Mary","count":1}
+[2025-05-31T12:14:37.539Z] [INFO] No game exists with game id:d9353. Making a new game for bz0sYs4oWjTT3tZ2AAAY
+[2025-05-31T12:14:37.540Z] [INFO] White player is assigned to: bz0sYs4oWjTT3tZ2AAAY
+[2025-05-31T12:14:37.542Z] [INFO] a page connected to the server: TopD3vbD3qbldmmJAAAZ
+[2025-05-31T12:14:37.542Z] [INFO] [connection] Новый пользователь подключен: socket.id=TopD3vbD3qbldmmJAAAZ
+[2025-05-31T12:14:37.547Z] [INFO] Server received a command
+[2025-05-31T12:14:37.548Z] [INFO] 'join_room'
+[2025-05-31T12:14:37.548Z] [INFO] {"room":"d9353","username":"Emy"}
+[2025-05-31T12:14:37.549Z] [INFO] [join_room] Пользователь "Emy" присоединился к комнате "d9353". Участников: 2 [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:14:37.550Z] [INFO] join_room succeeded
+[2025-05-31T12:14:37.550Z] [INFO] {"result":"success","socket_id":"bz0sYs4oWjTT3tZ2AAAY","room":"d9353","username":"Mary","count":2}
+[2025-05-31T12:14:37.551Z] [INFO] [join_room] Пользователь "Emy" присоединился к комнате "d9353". Участников: 2 [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:14:37.551Z] [INFO] join_room succeeded
+[2025-05-31T12:14:37.551Z] [INFO] {"result":"success","socket_id":"TopD3vbD3qbldmmJAAAZ","room":"d9353","username":"Emy","count":2}
+[2025-05-31T12:14:37.552Z] [INFO] Black player is assigned to: TopD3vbD3qbldmmJAAAZ
+[2025-05-31T12:14:39.532Z] [INFO] Server received a command
+[2025-05-31T12:14:39.534Z] [INFO] 'play_token'
+[2025-05-31T12:14:39.535Z] [INFO] {"row":2,"column":3,"color":"black"}
+[2025-05-31T12:14:39.535Z] [INFO] [play_token] Ход от "Emy" (black) на (2, 3) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:14:41.414Z] [INFO] Server received a command
+[2025-05-31T12:14:41.418Z] [INFO] 'play_token'
+[2025-05-31T12:14:41.419Z] [INFO] {"row":2,"column":2,"color":"white"}
+[2025-05-31T12:14:41.419Z] [INFO] [play_token] Ход от "Mary" (white) на (2, 2) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:14:49.446Z] [INFO] Server received a command
+[2025-05-31T12:14:49.448Z] [INFO] 'play_token'
+[2025-05-31T12:14:49.448Z] [INFO] {"row":3,"column":2,"color":"black"}
+[2025-05-31T12:14:49.449Z] [INFO] [play_token] Ход от "Emy" (black) на (3, 2) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:14:50.980Z] [INFO] Server received a command
+[2025-05-31T12:14:50.984Z] [INFO] 'play_token'
+[2025-05-31T12:14:50.984Z] [INFO] {"row":2,"column":4,"color":"white"}
+[2025-05-31T12:14:50.985Z] [INFO] [play_token] Ход от "Mary" (white) на (2, 4) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:14:53.113Z] [INFO] Server received a command
+[2025-05-31T12:14:53.114Z] [INFO] 'play_token'
+[2025-05-31T12:14:53.115Z] [INFO] {"row":1,"column":1,"color":"black"}
+[2025-05-31T12:14:53.115Z] [INFO] [play_token] Ход от "Emy" (black) на (1, 1) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:14:55.296Z] [INFO] Server received a command
+[2025-05-31T12:14:55.302Z] [INFO] 'play_token'
+[2025-05-31T12:14:55.303Z] [INFO] {"row":0,"column":0,"color":"white"}
+[2025-05-31T12:14:55.303Z] [INFO] [play_token] Ход от "Mary" (white) на (0, 0) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:14:57.182Z] [INFO] Server received a command
+[2025-05-31T12:14:57.184Z] [INFO] 'play_token'
+[2025-05-31T12:14:57.185Z] [INFO] {"row":1,"column":4,"color":"black"}
+[2025-05-31T12:14:57.185Z] [INFO] [play_token] Ход от "Emy" (black) на (1, 4) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:14:58.796Z] [INFO] Server received a command
+[2025-05-31T12:14:58.802Z] [INFO] 'play_token'
+[2025-05-31T12:14:58.802Z] [INFO] {"row":0,"column":4,"color":"white"}
+[2025-05-31T12:14:58.803Z] [INFO] [play_token] Ход от "Mary" (white) на (0, 4) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:00.582Z] [INFO] Server received a command
+[2025-05-31T12:15:00.584Z] [INFO] 'play_token'
+[2025-05-31T12:15:00.584Z] [INFO] {"row":4,"column":5,"color":"black"}
+[2025-05-31T12:15:00.585Z] [INFO] [play_token] Ход от "Emy" (black) на (4, 5) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:02.397Z] [INFO] Server received a command
+[2025-05-31T12:15:02.401Z] [INFO] 'play_token'
+[2025-05-31T12:15:02.402Z] [INFO] {"row":4,"column":1,"color":"white"}
+[2025-05-31T12:15:02.402Z] [INFO] [play_token] Ход от "Mary" (white) на (4, 1) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:04.246Z] [INFO] Server received a command
+[2025-05-31T12:15:04.251Z] [INFO] 'play_token'
+[2025-05-31T12:15:04.251Z] [INFO] {"row":2,"column":1,"color":"black"}
+[2025-05-31T12:15:04.251Z] [INFO] [play_token] Ход от "Emy" (black) на (2, 1) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:05.846Z] [INFO] Server received a command
+[2025-05-31T12:15:05.847Z] [INFO] 'play_token'
+[2025-05-31T12:15:05.847Z] [INFO] {"row":5,"column":6,"color":"white"}
+[2025-05-31T12:15:05.848Z] [INFO] [play_token] Ход от "Mary" (white) на (5, 6) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:07.346Z] [INFO] Server received a command
+[2025-05-31T12:15:07.352Z] [INFO] 'play_token'
+[2025-05-31T12:15:07.352Z] [INFO] {"row":3,"column":5,"color":"black"}
+[2025-05-31T12:15:07.353Z] [INFO] [play_token] Ход от "Emy" (black) на (3, 5) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:09.179Z] [INFO] Server received a command
+[2025-05-31T12:15:09.181Z] [INFO] 'play_token'
+[2025-05-31T12:15:09.183Z] [INFO] {"row":2,"column":0,"color":"white"}
+[2025-05-31T12:15:09.183Z] [INFO] [play_token] Ход от "Mary" (white) на (2, 0) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:10.645Z] [INFO] Server received a command
+[2025-05-31T12:15:10.651Z] [INFO] 'play_token'
+[2025-05-31T12:15:10.651Z] [INFO] {"row":5,"column":5,"color":"black"}
+[2025-05-31T12:15:10.652Z] [INFO] [play_token] Ход от "Emy" (black) на (5, 5) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:12.479Z] [INFO] Server received a command
+[2025-05-31T12:15:12.483Z] [INFO] 'play_token'
+[2025-05-31T12:15:12.484Z] [INFO] {"row":4,"column":6,"color":"white"}
+[2025-05-31T12:15:12.484Z] [INFO] [play_token] Ход от "Mary" (white) на (4, 6) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:14.580Z] [INFO] Server received a command
+[2025-05-31T12:15:14.582Z] [INFO] 'play_token'
+[2025-05-31T12:15:14.583Z] [INFO] {"row":0,"column":5,"color":"black"}
+[2025-05-31T12:15:14.584Z] [INFO] [play_token] Ход от "Emy" (black) на (0, 5) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:16.148Z] [INFO] Server received a command
+[2025-05-31T12:15:16.151Z] [INFO] 'play_token'
+[2025-05-31T12:15:16.151Z] [INFO] {"row":0,"column":6,"color":"white"}
+[2025-05-31T12:15:16.151Z] [INFO] [play_token] Ход от "Mary" (white) на (0, 6) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:17.745Z] [INFO] Server received a command
+[2025-05-31T12:15:17.749Z] [INFO] 'play_token'
+[2025-05-31T12:15:17.750Z] [INFO] {"row":6,"column":7,"color":"black"}
+[2025-05-31T12:15:17.750Z] [INFO] [play_token] Ход от "Emy" (black) на (6, 7) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:19.362Z] [INFO] Server received a command
+[2025-05-31T12:15:19.366Z] [INFO] 'play_token'
+[2025-05-31T12:15:19.367Z] [INFO] {"row":5,"column":3,"color":"white"}
+[2025-05-31T12:15:19.367Z] [INFO] [play_token] Ход от "Mary" (white) на (5, 3) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:21.012Z] [INFO] Server received a command
+[2025-05-31T12:15:21.016Z] [INFO] 'play_token'
+[2025-05-31T12:15:21.017Z] [INFO] {"row":6,"column":3,"color":"black"}
+[2025-05-31T12:15:21.018Z] [INFO] [play_token] Ход от "Emy" (black) на (6, 3) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:22.449Z] [INFO] Server received a command
+[2025-05-31T12:15:22.451Z] [INFO] 'play_token'
+[2025-05-31T12:15:22.451Z] [INFO] {"row":3,"column":1,"color":"white"}
+[2025-05-31T12:15:22.452Z] [INFO] [play_token] Ход от "Mary" (white) на (3, 1) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:24.231Z] [INFO] Server received a command
+[2025-05-31T12:15:24.237Z] [INFO] 'play_token'
+[2025-05-31T12:15:24.238Z] [INFO] {"row":4,"column":7,"color":"black"}
+[2025-05-31T12:15:24.239Z] [INFO] [play_token] Ход от "Emy" (black) на (4, 7) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:26.249Z] [INFO] Server received a command
+[2025-05-31T12:15:26.251Z] [INFO] 'play_token'
+[2025-05-31T12:15:26.252Z] [INFO] {"row":6,"column":5,"color":"white"}
+[2025-05-31T12:15:26.252Z] [INFO] [play_token] Ход от "Mary" (white) на (6, 5) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:28.114Z] [INFO] Server received a command
+[2025-05-31T12:15:28.116Z] [INFO] 'play_token'
+[2025-05-31T12:15:28.117Z] [INFO] {"row":2,"column":5,"color":"black"}
+[2025-05-31T12:15:28.117Z] [INFO] [play_token] Ход от "Emy" (black) на (2, 5) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:29.729Z] [INFO] Server received a command
+[2025-05-31T12:15:29.733Z] [INFO] 'play_token'
+[2025-05-31T12:15:29.733Z] [INFO] {"row":1,"column":2,"color":"white"}
+[2025-05-31T12:15:29.734Z] [INFO] [play_token] Ход от "Mary" (white) на (1, 2) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:31.633Z] [INFO] Server received a command
+[2025-05-31T12:15:31.636Z] [INFO] 'play_token'
+[2025-05-31T12:15:31.636Z] [INFO] {"row":1,"column":3,"color":"black"}
+[2025-05-31T12:15:31.637Z] [INFO] [play_token] Ход от "Emy" (black) на (1, 3) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:33.195Z] [INFO] Server received a command
+[2025-05-31T12:15:33.201Z] [INFO] 'play_token'
+[2025-05-31T12:15:33.202Z] [INFO] {"row":0,"column":2,"color":"white"}
+[2025-05-31T12:15:33.202Z] [INFO] [play_token] Ход от "Mary" (white) на (0, 2) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:35.065Z] [INFO] Server received a command
+[2025-05-31T12:15:35.067Z] [INFO] 'play_token'
+[2025-05-31T12:15:35.067Z] [INFO] {"row":7,"column":4,"color":"black"}
+[2025-05-31T12:15:35.068Z] [INFO] [play_token] Ход от "Emy" (black) на (7, 4) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:36.732Z] [INFO] Server received a command
+[2025-05-31T12:15:36.733Z] [INFO] 'play_token'
+[2025-05-31T12:15:36.734Z] [INFO] {"row":5,"column":4,"color":"white"}
+[2025-05-31T12:15:36.734Z] [INFO] [play_token] Ход от "Mary" (white) на (5, 4) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:39.430Z] [INFO] Server received a command
+[2025-05-31T12:15:39.432Z] [INFO] 'play_token'
+[2025-05-31T12:15:39.433Z] [INFO] {"row":0,"column":3,"color":"black"}
+[2025-05-31T12:15:39.433Z] [INFO] [play_token] Ход от "Emy" (black) на (0, 3) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:41.317Z] [INFO] Server received a command
+[2025-05-31T12:15:41.319Z] [INFO] 'play_token'
+[2025-05-31T12:15:41.319Z] [INFO] {"row":1,"column":5,"color":"white"}
+[2025-05-31T12:15:41.320Z] [INFO] [play_token] Ход от "Mary" (white) на (1, 5) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:42.997Z] [INFO] Server received a command
+[2025-05-31T12:15:43.001Z] [INFO] 'play_token'
+[2025-05-31T12:15:43.001Z] [INFO] {"row":4,"column":2,"color":"black"}
+[2025-05-31T12:15:43.002Z] [INFO] [play_token] Ход от "Emy" (black) на (4, 2) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:44.432Z] [INFO] Server received a command
+[2025-05-31T12:15:44.434Z] [INFO] 'play_token'
+[2025-05-31T12:15:44.434Z] [INFO] {"row":3,"column":7,"color":"white"}
+[2025-05-31T12:15:44.435Z] [INFO] [play_token] Ход от "Mary" (white) на (3, 7) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:46.131Z] [INFO] Server received a command
+[2025-05-31T12:15:46.134Z] [INFO] 'play_token'
+[2025-05-31T12:15:46.134Z] [INFO] {"row":5,"column":0,"color":"black"}
+[2025-05-31T12:15:46.135Z] [INFO] [play_token] Ход от "Emy" (black) на (5, 0) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:48.049Z] [INFO] Server received a command
+[2025-05-31T12:15:48.051Z] [INFO] 'play_token'
+[2025-05-31T12:15:48.051Z] [INFO] {"row":4,"column":0,"color":"white"}
+[2025-05-31T12:15:48.052Z] [INFO] [play_token] Ход от "Mary" (white) на (4, 0) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:49.912Z] [INFO] Server received a command
+[2025-05-31T12:15:49.916Z] [INFO] 'play_token'
+[2025-05-31T12:15:49.917Z] [INFO] {"row":5,"column":2,"color":"black"}
+[2025-05-31T12:15:49.917Z] [INFO] [play_token] Ход от "Emy" (black) на (5, 2) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:51.847Z] [INFO] Server received a command
+[2025-05-31T12:15:51.850Z] [INFO] 'play_token'
+[2025-05-31T12:15:51.851Z] [INFO] {"row":5,"column":7,"color":"white"}
+[2025-05-31T12:15:51.851Z] [INFO] [play_token] Ход от "Mary" (white) на (5, 7) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:53.613Z] [INFO] Server received a command
+[2025-05-31T12:15:53.618Z] [INFO] 'play_token'
+[2025-05-31T12:15:53.618Z] [INFO] {"row":6,"column":6,"color":"black"}
+[2025-05-31T12:15:53.618Z] [INFO] [play_token] Ход от "Emy" (black) на (6, 6) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:55.565Z] [INFO] Server received a command
+[2025-05-31T12:15:55.567Z] [INFO] 'play_token'
+[2025-05-31T12:15:55.567Z] [INFO] {"row":6,"column":4,"color":"white"}
+[2025-05-31T12:15:55.568Z] [INFO] [play_token] Ход от "Mary" (white) на (6, 4) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:15:57.298Z] [INFO] Server received a command
+[2025-05-31T12:15:57.300Z] [INFO] 'play_token'
+[2025-05-31T12:15:57.300Z] [INFO] {"row":6,"column":2,"color":"black"}
+[2025-05-31T12:15:57.301Z] [INFO] [play_token] Ход от "Emy" (black) на (6, 2) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:15:58.929Z] [INFO] Server received a command
+[2025-05-31T12:15:58.934Z] [INFO] 'play_token'
+[2025-05-31T12:15:58.934Z] [INFO] {"row":6,"column":0,"color":"white"}
+[2025-05-31T12:15:58.935Z] [INFO] [play_token] Ход от "Mary" (white) на (6, 0) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:16:00.915Z] [INFO] Server received a command
+[2025-05-31T12:16:00.920Z] [INFO] 'play_token'
+[2025-05-31T12:16:00.921Z] [INFO] {"row":5,"column":1,"color":"black"}
+[2025-05-31T12:16:00.921Z] [INFO] [play_token] Ход от "Emy" (black) на (5, 1) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:16:03.301Z] [INFO] Server received a command
+[2025-05-31T12:16:03.303Z] [INFO] 'play_token'
+[2025-05-31T12:16:03.303Z] [INFO] {"row":6,"column":1,"color":"white"}
+[2025-05-31T12:16:03.304Z] [INFO] [play_token] Ход от "Mary" (white) на (6, 1) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:16:05.000Z] [INFO] Server received a command
+[2025-05-31T12:16:05.001Z] [INFO] 'play_token'
+[2025-05-31T12:16:05.002Z] [INFO] {"row":7,"column":5,"color":"black"}
+[2025-05-31T12:16:05.002Z] [INFO] [play_token] Ход от "Emy" (black) на (7, 5) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:16:09.097Z] [INFO] Server received a command
+[2025-05-31T12:16:09.099Z] [INFO] 'play_token'
+[2025-05-31T12:16:09.100Z] [INFO] {"row":7,"column":3,"color":"white"}
+[2025-05-31T12:16:09.100Z] [INFO] [play_token] Ход от "Mary" (white) на (7, 3) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:16:10.780Z] [INFO] Server received a command
+[2025-05-31T12:16:10.784Z] [INFO] 'play_token'
+[2025-05-31T12:16:10.785Z] [INFO] {"row":7,"column":2,"color":"black"}
+[2025-05-31T12:16:10.785Z] [INFO] [play_token] Ход от "Emy" (black) на (7, 2) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:16:12.301Z] [INFO] Server received a command
+[2025-05-31T12:16:12.303Z] [INFO] 'play_token'
+[2025-05-31T12:16:12.303Z] [INFO] {"row":7,"column":7,"color":"white"}
+[2025-05-31T12:16:12.304Z] [INFO] [play_token] Ход от "Mary" (white) на (7, 7) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:16:14.067Z] [INFO] Server received a command
+[2025-05-31T12:16:14.069Z] [INFO] 'play_token'
+[2025-05-31T12:16:14.069Z] [INFO] {"row":1,"column":6,"color":"black"}
+[2025-05-31T12:16:14.070Z] [INFO] [play_token] Ход от "Emy" (black) на (1, 6) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:16:15.430Z] [INFO] Server received a command
+[2025-05-31T12:16:15.434Z] [INFO] 'play_token'
+[2025-05-31T12:16:15.435Z] [INFO] {"row":0,"column":7,"color":"white"}
+[2025-05-31T12:16:15.435Z] [INFO] [play_token] Ход от "Mary" (white) на (0, 7) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:16:17.147Z] [INFO] Server received a command
+[2025-05-31T12:16:17.153Z] [INFO] 'play_token'
+[2025-05-31T12:16:17.153Z] [INFO] {"row":2,"column":6,"color":"black"}
+[2025-05-31T12:16:17.153Z] [INFO] [play_token] Ход от "Emy" (black) на (2, 6) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:16:18.917Z] [INFO] Server received a command
+[2025-05-31T12:16:18.918Z] [INFO] 'play_token'
+[2025-05-31T12:16:18.919Z] [INFO] {"row":2,"column":7,"color":"white"}
+[2025-05-31T12:16:18.919Z] [INFO] [play_token] Ход от "Mary" (white) на (2, 7) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:16:22.119Z] [INFO] Server received a command
+[2025-05-31T12:16:22.122Z] [INFO] 'play_token'
+[2025-05-31T12:16:22.122Z] [INFO] {"row":3,"column":6,"color":"black"}
+[2025-05-31T12:16:22.122Z] [INFO] [play_token] Ход от "Emy" (black) на (3, 6) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:16:23.999Z] [INFO] Server received a command
+[2025-05-31T12:16:24.001Z] [INFO] 'play_token'
+[2025-05-31T12:16:24.001Z] [INFO] {"row":7,"column":1,"color":"white"}
+[2025-05-31T12:16:24.001Z] [INFO] [play_token] Ход от "Mary" (white) на (7, 1) в игре "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:16:26.513Z] [INFO] Server received a command
+[2025-05-31T12:16:26.517Z] [INFO] 'play_token'
+[2025-05-31T12:16:26.517Z] [INFO] {"row":7,"column":6,"color":"black"}
+[2025-05-31T12:16:26.518Z] [INFO] [play_token] Ход от "Emy" (black) на (7, 6) в игре "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:16:26.519Z] [INFO] addGame: добавление игры d9353
+[2025-05-31T12:16:28.846Z] [INFO] addGame: игра d9353 успешно добавлена
+[2025-05-31T12:16:31.395Z] [INFO] a page connected to the server: w5cKSH0wcewCCpNHAAAb
+[2025-05-31T12:16:31.398Z] [INFO] [connection] Новый пользователь подключен: socket.id=w5cKSH0wcewCCpNHAAAb
+[2025-05-31T12:16:31.402Z] [INFO] a page disconnected from the server: bz0sYs4oWjTT3tZ2AAAY
+[2025-05-31T12:16:31.403Z] [INFO] player_dissconnected succeeded 
+[2025-05-31T12:16:31.403Z] [INFO] {"username":"Mary","room":"d9353","count":1,"socket_id":"bz0sYs4oWjTT3tZ2AAAY"}
+[2025-05-31T12:16:31.404Z] [INFO] [disconnect] Пользователь "Mary" отключился от комнаты "d9353" [socket.id=bz0sYs4oWjTT3tZ2AAAY]
+[2025-05-31T12:16:31.407Z] [INFO] Server received a command
+[2025-05-31T12:16:31.407Z] [INFO] 'join_room'
+[2025-05-31T12:16:31.408Z] [INFO] {"room":"зал ожидания","username":"Mary"}
+[2025-05-31T12:16:31.408Z] [INFO] [join_room] Пользователь "Mary" присоединился к комнате "зал ожидания". Участников: 1 [socket.id=w5cKSH0wcewCCpNHAAAb]
+[2025-05-31T12:16:31.409Z] [INFO] join_room succeeded
+[2025-05-31T12:16:31.409Z] [INFO] {"result":"success","socket_id":"w5cKSH0wcewCCpNHAAAb","room":"зал ожидания","username":"Mary","count":1}
+[2025-05-31T12:16:34.452Z] [INFO] a page disconnected from the server: TopD3vbD3qbldmmJAAAZ
+[2025-05-31T12:16:34.454Z] [INFO] player_dissconnected succeeded 
+[2025-05-31T12:16:34.455Z] [INFO] {"username":"Emy","room":"d9353","count":1,"socket_id":"TopD3vbD3qbldmmJAAAZ"}
+[2025-05-31T12:16:34.456Z] [INFO] [disconnect] Пользователь "Emy" отключился от комнаты "d9353" [socket.id=TopD3vbD3qbldmmJAAAZ]
+[2025-05-31T12:16:34.460Z] [INFO] a page connected to the server: cl99JexxE0XP5yxyAAAd
+[2025-05-31T12:16:34.461Z] [INFO] [connection] Новый пользователь подключен: socket.id=cl99JexxE0XP5yxyAAAd
+[2025-05-31T12:16:34.464Z] [INFO] Server received a command
+[2025-05-31T12:16:34.465Z] [INFO] 'join_room'
+[2025-05-31T12:16:34.465Z] [INFO] {"room":"зал ожидания","username":"Emy"}
+[2025-05-31T12:16:34.467Z] [INFO] [join_room] Пользователь "Emy" присоединился к комнате "зал ожидания". Участников: 2 [socket.id=cl99JexxE0XP5yxyAAAd]
+[2025-05-31T12:16:34.468Z] [INFO] join_room succeeded
+[2025-05-31T12:16:34.468Z] [INFO] {"result":"success","socket_id":"w5cKSH0wcewCCpNHAAAb","room":"зал ожидания","username":"Mary","count":2}
+[2025-05-31T12:16:34.468Z] [INFO] [join_room] Пользователь "Emy" присоединился к комнате "зал ожидания". Участников: 2 [socket.id=cl99JexxE0XP5yxyAAAd]
+[2025-05-31T12:16:34.468Z] [INFO] join_room succeeded
+[2025-05-31T12:16:34.468Z] [INFO] {"result":"success","socket_id":"cl99JexxE0XP5yxyAAAd","room":"зал ожидания","username":"Emy","count":2}
+[2025-05-31T12:17:57.174Z] [INFO] a page disconnected from the server: cl99JexxE0XP5yxyAAAd
+[2025-05-31T12:17:57.178Z] [INFO] player_dissconnected succeeded 
+[2025-05-31T12:17:57.179Z] [INFO] {"username":"Emy","room":"зал ожидания","count":1,"socket_id":"cl99JexxE0XP5yxyAAAd"}
+[2025-05-31T12:17:57.180Z] [INFO] [disconnect] Пользователь "Emy" отключился от комнаты "зал ожидания" [socket.id=cl99JexxE0XP5yxyAAAd]
+[2025-05-31T12:17:57.185Z] [INFO] a page connected to the server: sem-HyHu55fo6E8rAAAf
+[2025-05-31T12:17:57.186Z] [INFO] [connection] Новый пользователь подключен: socket.id=sem-HyHu55fo6E8rAAAf
+[2025-05-31T12:17:58.747Z] [INFO] a page disconnected from the server: sem-HyHu55fo6E8rAAAf
+[2025-05-31T12:17:58.769Z] [INFO] a page connected to the server: 5mq9ICTYWS9IHN4AAAAh
+[2025-05-31T12:17:58.771Z] [INFO] [connection] Новый пользователь подключен: socket.id=5mq9ICTYWS9IHN4AAAAh
+[2025-05-31T12:17:58.774Z] [INFO] Server received a command
+[2025-05-31T12:17:58.775Z] [INFO] 'get_user'
+[2025-05-31T12:17:58.775Z] [INFO] "Emy"
+[2025-05-31T12:17:58.775Z] [INFO] getUserByUsername: получение пользователя "Emy"
+[2025-05-31T12:17:58.778Z] [INFO] Server received a command
+[2025-05-31T12:17:58.779Z] [INFO] 'get_games'
+[2025-05-31T12:17:58.779Z] [INFO] "Emy"
+[2025-05-31T12:17:58.779Z] [INFO] getUserGames: получение игр пользователя "Emy"
+[2025-05-31T12:18:01.058Z] [INFO] getUserGames: найдено 1 игр
+[2025-05-31T12:18:01.060Z] [INFO] [get_games] Получены игры пользователя "Emy"
+[2025-05-31T12:18:01.662Z] [INFO] getUserByUsername: результат - [{"username":"Emy","first_name":"Emy","last_name":"Emy","password":"$2b$10$z6MtGn8bOW3lg8xLZKp9TOi71f2fMsnPDN65ZlJeKfeF2roWGU9Ri","email":"Emy@mail.ru"}]
+[2025-05-31T12:18:01.663Z] [INFO] [get_user] Данные пользователя "Emy" успешно получены
