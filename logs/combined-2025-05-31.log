@@ -383,3 +383,21 @@
 [2025-05-31T12:18:01.060Z] [INFO] [get_games] Получены игры пользователя "Emy"
 [2025-05-31T12:18:01.662Z] [INFO] getUserByUsername: результат - [{"username":"Emy","first_name":"Emy","last_name":"Emy","password":"$2b$10$z6MtGn8bOW3lg8xLZKp9TOi71f2fMsnPDN65ZlJeKfeF2roWGU9Ri","email":"Emy@mail.ru"}]
 [2025-05-31T12:18:01.663Z] [INFO] [get_user] Данные пользователя "Emy" успешно получены
+[2025-05-31T13:31:46.045Z] [INFO] The server is running
+[2025-05-31T13:31:47.464Z] [INFO] a page connected to the server: uBouKRy9-xzIY065AAAD
+[2025-05-31T13:31:47.465Z] [INFO] [connection] Новый пользователь подключен: socket.id=uBouKRy9-xzIY065AAAD
+[2025-05-31T13:31:47.467Z] [INFO] a page connected to the server: F9Svp5tGdfgB6-64AAAE
+[2025-05-31T13:31:47.468Z] [INFO] [connection] Новый пользователь подключен: socket.id=F9Svp5tGdfgB6-64AAAE
+[2025-05-31T13:31:47.469Z] [INFO] a page connected to the server: 9qooPMOnWaC9ISxOAAAF
+[2025-05-31T13:31:47.469Z] [INFO] [connection] Новый пользователь подключен: socket.id=9qooPMOnWaC9ISxOAAAF
+[2025-05-31T13:32:00.151Z] [INFO] a page connected to the server: k806UFEajB11ZnBuAAAH
+[2025-05-31T13:32:00.152Z] [INFO] [connection] Новый пользователь подключен: socket.id=k806UFEajB11ZnBuAAAH
+[2025-05-31T13:32:01.133Z] [INFO] a page disconnected from the server: 9qooPMOnWaC9ISxOAAAF
+[2025-05-31T13:32:05.743Z] [INFO] Server received a command
+[2025-05-31T13:32:05.744Z] [INFO] 'login'
+[2025-05-31T13:32:05.744Z] [INFO] {"username":"Ann","password":"Ann"}
+[2025-05-31T13:32:05.744Z] [INFO] getUserByUsername: получение пользователя "Ann"
+[2025-05-31T13:33:12.425Z] [INFO] Server received a command
+[2025-05-31T13:33:12.426Z] [INFO] 'login'
+[2025-05-31T13:33:12.427Z] [INFO] {"username":"Ann","password":"Ann"}
+[2025-05-31T13:33:12.427Z] [INFO] getUserByUsername: получение пользователя "Ann"
